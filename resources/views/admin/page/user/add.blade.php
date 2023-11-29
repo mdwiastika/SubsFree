@@ -61,6 +61,10 @@
                   <div class="form-group col-12 col-md-6">
                      <label for="proof_authenticity">Proof Authenticity (Optional)</label>
                      <input type="file" class="form-control" name="proof_authenticity" onchange="readURL(this)" accept=".png,.jpg,.jpeg">
+                     @if ($edit)
+                        <input type="hidden" id="old_proof_authenticity" value="{{ $data->proof_authenticity }}" name="old_proof_authenticity">
+                        <img src="{{ asset($data->proof_authenticity) }}" class="img-show mt-2" alt="">
+                     @endif
                   </div>
                   <div class="form-group col-12 col-md-6">
                      <label for="password">Password {{ $edit ? '(Isi jika ingin merubah password)' : '' }}</label>
