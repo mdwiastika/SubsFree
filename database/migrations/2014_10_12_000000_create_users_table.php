@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('no_telp');
-            $table->enum('level_user', ['Super Admin', 'Admin', 'Mitra', 'Pengguna']);
+            $table->string('no_wa');
+            $table->enum('level_user', ['Super Admin', 'Admin', 'Partner', 'Regular']);
             $table->enum('level_subscription', ['Class 1', 'Class 2', 'Class 3']);
-            $table->enum('status_user', ['Aktif', 'Non-Aktif']);
-            $table->text('bukti_keaslian')->nullable();
+            $table->enum('status_user', ['Active', 'Non-Active']);
+            $table->text('proof_authenticity')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

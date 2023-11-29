@@ -11,29 +11,15 @@
                      <span class="fas fa-plus"></span>&nbsp Data {{ $title }}
                   </button>
                @endif
-            </div><!-- /.col -->
-            {{-- <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">{{$title}}</li>
-                    </ol>
-                </div><!-- /.col --> --}}
-         </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+            </div>
+         </div>
+      </div>
    </div>
-   <!-- /.content-header -->
 
-   <!-- Main content -->
    <section class="content">
       <div class="container-fluid">
          <div class="card main-layer">
             <div class="card-body">
-               {{-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0">
-                        <button type="button" class="btn btn-sm btn-primary" onclick="add('0')" id="btn-add">
-                            <span class="fas fa-plus"></span>&nbsp Data {{$title}}
-                        </button>
-                    </div> --}}
-               <!-- Search -->
                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-inline pull-right panelSearch p-10 m-b-0 mb-3">
                   <div class="col-md-7 col-sm-7 col-xs-12 m-b-0 "></div>
                   <div class="col-md-2 col-sm-2 col-xs-12 m-b-0 ">
@@ -99,7 +85,7 @@
          pageInfoElement: '#info',
          columns: [{
                field: 'name',
-               title: 'Nama',
+               title: 'Name',
                editable: false,
                sortable: true,
                width: 200,
@@ -182,12 +168,12 @@
       function deleted(rowIndex) {
          var rowData = datagrid.getRowData(rowIndex);
          swal({
-            title: "Apakah Anda yakin akan menghapus data ini ?",
-            text: "Data akan di hapus dan tidak dapat diperbaharui kembali !",
+            title: "Are You Sure You Will Delete This Data ?",
+            text: "Data Will be Deleted and Cannot be Restored !",
             type: "warning",
             showCancelButton: true,
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Ya, Hapus Data!',
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete Data!',
          }).then((result) => {
             if (result.value) {
                $.post("{{ route('usersDestroy') }}", {
@@ -238,8 +224,8 @@
             text: "Data akan di ubah statusnya !",
             type: "warning",
             showCancelButton: true,
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Ya, Ubah Status!',
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Change Status!',
          }).then((result) => {
             if (result.value) {
                $.post("{{ route('changeStatusUsers') }}", {

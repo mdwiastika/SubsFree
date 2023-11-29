@@ -26,29 +26,29 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         if (empty($request->email)) {
-            return ResponseJsonTrait::responseJson(500, 'error', 'Kolom Email Harus Diisi', null);
+            return ResponseJsonTrait::responseJson(500, 'error', 'Email Field Must Be Filled', null);
         }
         if (empty($request->password)) {
-            return ResponseJsonTrait::responseJson(500, 'error', 'Kolom Password Harus Diisi', null);
+            return ResponseJsonTrait::responseJson(500, 'error', 'Password Field Must Be Filled', null);
         }
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
         $user = User::where('email', $request->email)->first();
-        if (!empty($user) && $user->status == 'Non-Aktif') {
+        if (!empty($user) && $user->status == 'Non-Active') {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Akun Anda Sedang Dinonaktifkan',
+                'message' => 'Your Account is Currently Deactivated',
             ]);
         }
         if (Auth::attempt($credentials)) {
             if (!$request->is('api/*')) {
                 $request->session()->regenerate();
             }
-            return ResponseJsonTrait::responseJson(200, 'success', 'Login Berhasil', $user);
+            return ResponseJsonTrait::responseJson(200, 'success', 'Success Login', $user);
         } else {
-            return ResponseJsonTrait::responseJson(500, 'error', 'Email atau Password Salah, silahkan Coba Kembali !!', null);
+            return ResponseJsonTrait::responseJson(500, 'error', 'Incorrect Email or Password, Please Try Again !!', null);
         }
     }
     public function logout(Request $request)
@@ -57,6 +57,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         Auth::logout();
-        return redirect()->route('login')->with('title', 'Berhasil !')->with('message', 'Anda telah logout.')->with('icon', 'success');
+        return redirect()->route('login')->with('title', 'Berhasil !')->with('message', 'Logout Success.')->with('icon', 'success');
     }
 }

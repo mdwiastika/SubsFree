@@ -13,12 +13,8 @@
                <input type="hidden" name="id" class="form-control" id="id" value="{{ $edit ? $data->id : '' }}">
                <div class="card-body row">
                   <div class="form-group col-12 col-md-6">
-                     <label for="nama_lengkap">Nama Lengkap</label>
-                     <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" value="{{ $edit ? $data->nama_lengkap : '' }}" placeholder="Nama Lengkap">
-                  </div>
-                  <div class="form-group col-12 col-md-6">
-                     <label for="username">Username</label>
-                     <input type="text" name="username" class="form-control" id="username" value="{{ $edit ? $data->username : '' }}" placeholder="Username">
+                     <label for="name">Name</label>
+                     <input type="text" name="name" class="form-control" id="name" value="{{ $edit ? $data->name : '' }}" placeholder="Name">
                   </div>
                   <div class="form-group col-12 col-md-6">
                      <label for="email">Email</label>
@@ -31,16 +27,40 @@
                   <div class="form-group col-12 col-md-6">
                      <label for="level_user">Level</label>
                      <select name="level_user" id="level_user" class="form-control">
-                        <option value="" selected disabled>.:: Pilih Level ::.</option>
+                        <option value="" selected disabled>-- Select Level --</option>
                         @if (Auth::user()->level_user == 'Super Admin')
                            <option value="Admin" {{ $edit ? ($data->level_user == 'Admin' ? 'selected' : '') : '' }}>
                               Admin
                            </option>
                         @endif
-                        <option value="Pengguna" {{ $edit ? ($data->level_user == 'Pengguna' ? 'selected' : '') : '' }}>
-                           Pengguna
+                        <option value="Partner" {{ $edit ? ($data->level_user == 'Partner' ? 'selected' : '') : '' }}>
+                           Partner
+                        </option>
+                        <option value="Regular" {{ $edit ? ($data->level_user == 'Regular' ? 'selected' : '') : '' }}>
+                           Regular
                         </option>
                      </select>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                     <label for="level_subscription">Subcription User</label>
+                     <select name="level_subscription" id="level_subscription" class="form-control">
+                        <option value="">-- Select Subcription --</option>
+                        <option value="Class 1" {{ $edit ? ($data->level_subscription == 'Class 1' ? 'selected' : '') : '' }}>Class 1</option>
+                        <option value="Class 2" {{ $edit ? ($data->level_subscription == 'Class 2' ? 'selected' : '') : '' }}>Class 2</option>
+                        <option value="Class 3" {{ $edit ? ($data->level_subscription == 'Class 3' ? 'selected' : '') : '' }}>Class 3</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                     <label for="status_user">Status User</label>
+                     <select name="status_user" id="status_user" class="form-control">
+                        <option value="">-- Select Status --</option>
+                        <option value="Active" {{ $edit ? ($data->status_user == 'Active' ? 'selected' : '') : '' }}>Active</option>
+                        <option value="Non-Active" {{ $edit ? ($data->status_user == 'Non-Active' ? 'selected' : '') : '' }}>Non-Active</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                     <label for="proof_authenticity">Proof Authenticity (Optional)</label>
+                     <input type="file" class="form-control" name="proof_authenticity" onchange="readURL(this)" accept=".png,.jpg,.jpeg">
                   </div>
                   <div class="form-group col-12 col-md-6">
                      <label for="password">Password {{ $edit ? '(Isi jika ingin merubah password)' : '' }}</label>
@@ -50,9 +70,9 @@
                <!-- /.card-body -->
 
                <div class="card-footer">
-                  <a href="javascript:void(0)" class="btn btn-warning" onclick="kembali()">Kembali</a>
+                  <a href="javascript:void(0)" class="btn btn-warning" onclick="kembali()">Back</a>
                   @if (!$show)
-                     <button type="submit" class="btn btn-primary btn-simpan">Simpan</button>
+                     <button type="submit" class="btn btn-primary btn-simpan">Save</button>
                   @endif
                </div>
             </form>
@@ -68,6 +88,31 @@
 <script>
    if ("{{ $show }}") {
       $('form *').prop('disabled', true)
+   }
+
+   function readURL(input, id_gambar) {
+      if (input.files && input.files[0]) {
+         const container_element = input.parentElement;
+         const img_elements = container_element.querySelectorAll('img');
+         img_elements.forEach(element => {
+            container_element.removeChild(element);
+         });
+         for (let img_arr = 0; img_arr < input.files.length; img_arr++) {
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(input.files[img_arr]);
+            oFReader.onload = function(oFREvent) {
+               const get_preview = document.createElement("img");
+               get_preview.style.maxHeight = '200px';
+               get_preview.style.objectFit = 'cover';
+               get_preview.style.maxWidth = '200px';
+               get_preview.style.marginTop = '20px';
+               get_preview.style.marginRight = '10px';
+               get_preview.style.borderRadius = '15px';
+               get_preview.src = oFREvent.target.result;
+               container_element.insertBefore(get_preview, input.nextSibling);
+            }
+         }
+      }
    }
 
    function kembali() {

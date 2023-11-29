@@ -31,7 +31,7 @@
             @if (Auth::check())
                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             @else
-               <a href="#" class="d-block">Tamu</a>
+               <a href="#" class="d-block">Guest</a>
             @endif
          </div>
       </div>
@@ -50,7 +50,7 @@
                   <li class="nav-item">
                      <a href="{{ route('users') }}" class="nav-link {{ $menu == 'user' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Pengguna</p>
+                        <p>Users</p>
                      </a>
                   </li>
                @endif

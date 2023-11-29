@@ -11,24 +11,26 @@
                         <div class="col-12">
                            <form class="form-data" method="post">
                               <input type="hidden" name="id" class="form-control" id="id" value="{{ $edit ? $data->id : '' }}">
+                              <input type="hidden" name="level_user" class="form-control" id="level_user" value="{{ $edit ? $data->level_user : '' }}">
+                              <input type="hidden" name="level_subscription" class="form-control" id="level_subscription" value="{{ $edit ? $data->level_subscription : '' }}">
+                              <input type="hidden" name="status_user" class="form-control" id="status_user" value="{{ $edit ? $data->status_user : '' }}">
                               <div class="card-body row">
                                  <div class="form-group col-12 col-md-6">
-                                    <label for="nama_lengkap">Nama Lengkap</label>
-                                    <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" value="{{ $edit ? $data->nama_lengkap : '' }}" placeholder="Nama Lengkap">
-                                 </div>
-                                 <div class="form-group col-12 col-md-6">
-                                    <label for="username">Username</label>
-                                    <input type="text" name="username" class="form-control" id="username" value="{{ $edit ? $data->username : '' }}" placeholder="Username">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" value="{{ $edit ? $data->name : '' }}" placeholder="Name">
                                  </div>
                                  <div class="form-group col-12 col-md-6">
                                     <label for="email">Email</label>
                                     <input type="text" name="email" class="form-control" id="email" value="{{ $edit ? $data->email : '' }}" placeholder="Email">
                                  </div>
                                  <div class="form-group col-12 col-md-6">
-                                    <label for="no_wa">No. Wa</label>
-                                    <input type="text" name="no_wa" class="form-control" id="no_wa" value="{{ $edit ? $data->no_wa : '' }}" placeholder="No. Wa">
+                                    <label for="no_wa">NO. WA</label>
+                                    <input type="text" name="no_wa" class="form-control" id="no_wa" value="{{ $edit ? $data->no_wa : '' }}" placeholder="NO. WA">
                                  </div>
-                                 <input type="hidden" value="{{ $data->level_user }}" name="level_user">
+                                 <div class="form-group col-12 col-md-6">
+                                    <label for="proof_authenticity">Proof Authenticity (Optional)</label>
+                                    <input type="file" class="form-control" name="proof_authenticity" onchange="readURL(this)" accept=".png,.jpg,.jpeg">
+                                 </div>
                                  <div class="form-group col-12 col-md-6">
                                     <label for="password">Password {{ $edit ? '(Isi jika ingin merubah password)' : '' }}</label>
                                     <input type="text" name="password" class="form-control" id="password" value="{{ $edit ? '' : '' }}" placeholder="Password">

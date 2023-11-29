@@ -35,7 +35,9 @@ Route::middleware('auth')->group(function () {
                 Route::post('/change-status', [UserController::class, 'changeStatus'])->name('changeStatusUsers');
             });
         });
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::middleware('is_partner')->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        });
     });
 });
 Route::middleware('guest')->group(function () {

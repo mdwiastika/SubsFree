@@ -64,9 +64,9 @@ class User extends Authenticatable
         $datagrid = new Datagrid;
         $data = $datagrid->datagrid_query($param, function ($data) {
             if (auth()->user()->level_user == 'Super Admin') {
-                return $data->whereIn('level_user', ['Admin', 'Pengguna']);
+                return $data->whereIn('level_user', ['Admin', 'Partner', 'Regular']);
             } else {
-                return $data->where('level_user', 'Pengguna');
+                return $data->whereIn('level_user', ['Partner', 'Regular']);
             }
         });
 
