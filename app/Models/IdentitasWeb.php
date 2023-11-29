@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class IdentitasWeb extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id_identitas_web';
 }

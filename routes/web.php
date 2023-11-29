@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\Admin\AuthController;
 use App\Http\Controllers\Web\Admin\DashboardController;
+use App\Http\Controllers\Web\Admin\IdentitasWebController;
 use App\Http\Controllers\Web\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/my-profile', [UserController::class, 'myProfile'])->name('myProfile');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
+        Route::middleware('is_super_admin')->group(function () {
+            Route::prefix('identitas-web')->group(function () {
+                Route::get('/', [IdentitasWebController::class, 'create'])->name('identitasWeb');
+                Route::post('/store', [IdentitasWebController::class, 'store'])->name('identitasWebStore');
+            });
+        });
         Route::middleware('is_admin')->group(function () {
             Route::prefix('user')->group(function () {
                 Route::get('/', [UserController::class, 'index'])->name('users');

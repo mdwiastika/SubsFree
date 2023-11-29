@@ -53,6 +53,14 @@
                         <p>Users</p>
                      </a>
                   </li>
+                  @if (Auth::user()->level_user == 'Super Admin')
+                     <li class="nav-item">
+                        <a href="{{ route('identitasWeb') }}" class="nav-link {{ $menu == 'identitas-web' ? 'active' : '' }}">
+                           <i class="nav-icon fas fa-laptop-code"></i>
+                           <p>Web Identity</p>
+                        </a>
+                     </li>
+                  @endif
                @endif
             @endif
          </ul>

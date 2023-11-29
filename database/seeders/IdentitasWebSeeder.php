@@ -15,13 +15,19 @@ class IdentitasWebSeeder extends Seeder
     {
         $identitas_web = [
             'name_company' => 'Sazam',
+            'no_wa_company' => '07812812812',
+            'address_company' => 'Surabaya, Jawa Timur, Indonesia',
+            'email_company' => 'sazam@gmail.com',
+            'twitter_company' => 'sazam',
+            'facebook_company' => 'sazam',
+            'instagram_company' => 'sazam',
             'logo_company' => null,
             'banner_company' => null,
+            'title_banner_company' => 'Langganan Bersama Kami Pasti Murah',
             'video_company' => null,
-            'about_company' => 'Ini Adalah contoh about nya',
-            'pembayaran_level_1' => 20000,
-            'pembayaran_level_2' => 40000,
-            'pembayaran_level_3' => 50000,
+            'payment_class_1' => 20000,
+            'payment_class_2' => 40000,
+            'payment_class_3' => 50000,
         ];
         IdentitasWeb::create($identitas_web);
     }

@@ -14,13 +14,19 @@ return new class extends Migration
         Schema::create('identitas_webs', function (Blueprint $table) {
             $table->id('id_identitas_web');
             $table->string('name_company');
+            $table->string('no_wa_company');
+            $table->string('address_company');
+            $table->string('email_company');
+            $table->string('twitter_company');
+            $table->string('facebook_company');
+            $table->string('instagram_company');
             $table->text('logo_company')->nullable();
             $table->text('banner_company')->nullable();
-            $table->string('judul_banner_company')->nullable();
+            $table->string('title_banner_company')->nullable();
             $table->text('video_company')->nullable();
-            $table->integer('pembayaran_level_1');
-            $table->integer('pembayaran_level_2');
-            $table->integer('pembayaran_level_3');
+            $table->integer('payment_class_1');
+            $table->integer('payment_class_2');
+            $table->integer('payment_class_3');
             $table->timestamps();
         });
     }

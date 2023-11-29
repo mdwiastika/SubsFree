@@ -12,58 +12,44 @@
                            <form class="row form-data" method="POST" enctype="multipart/form-data">
                               <input type="hidden" name="id_identitas_web" class="form-control" id="id_identitas_web" value="{{ $edit ? $data->id_identitas_web : '' }}">
                               <div class="row col-12">
-                                 <h4 class="col-12">Informasi Website</h4>
+                                 <h4 class="col-12">Website Information</h4>
+                                 <div class="col-12">
+                                    <div class="mb-3">
+                                       <label for="logo_company" class="form-label">Logo Company</label>
+                                       <input type="file" onchange="readURL(this)" accept=".png,.jpg,.jpeg" id="logo_company" name="logo_company" class="form-control">
+                                       @if ($edit)
+                                          <input type="hidden" id="old_logo_company" value="{{ $data->logo_company }}" name="old_logo_company">
+                                          <img src="{{ asset($data->logo_company) }}" class="img-show-mini mt-2" alt="">
+                                       @endif
+                                    </div>
+                                 </div>
                                  <div class="col-12 col-lg-6">
                                     <div class="mb-3">
-                                       <label for="nama_situs" class="form-label">Nama Situs</label>
-                                       <input value="{{ $edit ? $data->nama_situs : '' }}" type="text" id="nama_situs" name="nama_situs" class="form-control" placeholder="Nama Situs">
+                                       <label for="name_company" class="form-label">Name Company</label>
+                                       <input value="{{ $edit ? $data->name_company : '' }}" type="text" id="name_company" name="name_company" class="form-control" placeholder="Name Company">
                                     </div>
                                  </div>
                                  <div class="mb-3 col-lg-6">
-                                    <label class="form-label" for="no_wa_perusahaan">No. WA Perusahaan</label>
-                                    <input type="text" class="form-control" value="{{ $edit ? $data->no_wa_perusahaan : '' }}" id="no_wa_perusahaan" name="no_wa_perusahaan" data-toggle="input-mask" data-mask-format="(00) 0000-0000-0000" placeholder="No. WA Perusahaan">
+                                    <label class="form-label" for="no_wa_company">No. WA Company</label>
+                                    <input type="text" class="form-control" value="{{ $edit ? $data->no_wa_company : '' }}" id="no_wa_company" name="no_wa_company" data-toggle="input-mask" data-mask-format="(00) 0000-0000-0000" placeholder="No. WA Company">
                                     <span class="font-13 text-muted">e.g "(62) xxxx-xxxx-xxxx"</span>
                                  </div>
                                  <div class="col-12 col-lg-6">
                                     <div class="mb-3">
-                                       <label for="email_perusahaan" class="form-label">Email Perusahaan</label>
-                                       <input value="{{ $edit ? $data->email_perusahaan : '' }}" type="text" id="email_perusahaan" name="email_perusahaan" class="form-control" placeholder="Email Perusahaan">
+                                       <label for="email_company" class="form-label">Email Company</label>
+                                       <input value="{{ $edit ? $data->email_company : '' }}" type="email" id="email_company" name="email_company" class="form-control" placeholder="Email Company">
                                     </div>
                                  </div>
                                  <div class="col-12 col-lg-6">
                                     <div class="mb-3">
-                                       <label for="no_telepon_perusahaan" class="form-label">No Telepon Perusahaan</label>
-                                       <input value="{{ $edit ? $data->no_telepon_perusahaan : '' }}" type="text" id="no_telepon_perusahaan" name="no_telepon_perusahaan" class="form-control" placeholder="No Telepon Perusahaan">
-                                    </div>
-                                 </div>
-                                 <div class="col-12 col-lg-6">
-                                    <div class="mb-3">
-                                       <label for="primary" class="form-label">Primary</label>
-                                       <input value="{{ $edit ? $data->primary : '' }}" type="color" id="primary" name="primary" class="form-control" placeholder="Primary">
-                                    </div>
-                                 </div>
-                                 <div class="col-12 col-lg-6">
-                                    <div class="mb-3">
-                                       <label for="dark" class="form-label">Dark</label>
-                                       <input value="{{ $edit ? $data->dark : '' }}" type="color" id="dark" name="dark" class="form-control" placeholder="Dark">
-                                    </div>
-                                 </div>
-                                 <div class="col-12 col-lg-6">
-                                    <div class="mb-3">
-                                       <label for="deskripsi_perusahaan" class="form-label">Deskripsi Perusahaan</label>
-                                       <textarea name="deskripsi_perusahaan" class="form-control" id="deskripsi_perusahaan" cols="10" rows="5" placeholder="Deskripsi Perusahaan">{{ $edit ? $data->deskripsi_perusahaan : '' }}</textarea>
-                                    </div>
-                                 </div>
-                                 <div class="col-12 col-lg-6">
-                                    <div class="mb-3">
-                                       <label for="slogan_perusahaan" class="form-label">Slogan Perusahaan</label>
-                                       <textarea name="slogan_perusahaan" class="form-control" id="slogan_perusahaan" cols="10" rows="5" placeholder="Slogan Perusahaan">{{ $edit ? $data->slogan_perusahaan : '' }}</textarea>
+                                       <label for="video_company" class="form-label">Link Video YT Company</label>
+                                       <input value="{{ $edit ? $data->video_company : '' }}" type="text" id="video_company" name="video_company" class="form-control" placeholder="Link Video YT Company">
                                     </div>
                                  </div>
                                  <div class="col-12">
                                     <div class="mb-5">
-                                       <label for="alamat_perusahaan" class="form-label">Alamat Perusahaan</label>
-                                       <textarea name="alamat_perusahaan" class="form-control" id="alamat_perusahaan" cols="10" rows="5" placeholder="Alamat Perusahaan">{{ $edit ? $data->alamat_perusahaan : '' }}</textarea>
+                                       <label for="address_company" class="form-label">Address Company</label>
+                                       <textarea name="address_company" class="form-control" id="address_company" cols="10" rows="5" placeholder="Address Company">{{ $edit ? $data->address_company : '' }}</textarea>
                                     </div>
                                  </div>
                                  <hr class="bg-info w-100" style="height: 1px">
@@ -71,37 +57,63 @@
 
                                  <div class="col-12 col-lg-6">
                                     <div class="mb-3">
-                                       <label for="facebook_perusahaan" class="form-label">Facebook</label>
-                                       <input value="{{ $edit ? $data->facebook_perusahaan : '' }}" type="text" id="facebook_perusahaan" name="facebook_perusahaan" class="form-control" placeholder="Facebook">
+                                       <label for="facebook_company" class="form-label">Facebook</label>
+                                       <input value="{{ $edit ? $data->facebook_company : '' }}" type="text" id="facebook_company" name="facebook_company" class="form-control" placeholder="Facebook">
                                     </div>
                                  </div>
                                  <div class="col-12 col-lg-6">
                                     <div class="mb-3">
-                                       <label for="twitter_perusahaan" class="form-label">Twitter</label>
-                                       <input value="{{ $edit ? $data->twitter_perusahaan : '' }}" type="text" id="twitter_perusahaan" name="twitter_perusahaan" class="form-control" placeholder="Twitter">
+                                       <label for="twitter_company" class="form-label">Twitter</label>
+                                       <input value="{{ $edit ? $data->twitter_company : '' }}" type="text" id="twitter_company" name="twitter_company" class="form-control" placeholder="Twitter">
                                     </div>
                                  </div>
                                  <div class="col-12 col-lg-6">
                                     <div class="mb-2">
-                                       <label for="instagram_perusahaan" class="form-label">Instagram</label>
-                                       <input value="{{ $edit ? $data->instagram_perusahaan : '' }}" type="text" id="instagram_perusahaan" name="instagram_perusahaan" class="form-control" placeholder="Instagram">
+                                       <label for="instagram_company" class="form-label">Instagram</label>
+                                       <input value="{{ $edit ? $data->instagram_company : '' }}" type="text" id="instagram_company" name="instagram_company" class="form-control" placeholder="Instagram">
                                     </div>
                                  </div>
                                  <hr class="bg-info w-100" style="height: 1px">
-                                 <h4 class="col-12 mt-2">Gambar</h4>
-                                 <div class="col-12">
+                                 <h4 class="col-12">Banner Homepage</h4>
+                                 <div class="col-12 col-lg-6">
                                     <div class="mb-3">
-                                       <label for="logo_situs" class="form-label">Logo Situs</label>
-                                       <input type="file" onchange="readURL(this)" accept=".png,.jpg,.jpeg" id="logo_situs" name="logo_situs" class="form-control">
+                                       <label for="title_banner_company" class="form-label">Title Company</label>
+                                       <input value="{{ $edit ? $data->title_banner_company : '' }}" type="text" id="title_banner_company" name="title_banner_company" class="form-control" placeholder="Title Company">
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6">
+                                    <div class="mb-3">
+                                       <label for="banner_company" class="form-label">Banner Company</label>
+                                       <input type="file" onchange="readURL(this)" accept=".png,.jpg,.jpeg" id="banner_company" name="banner_company" class="form-control">
                                        @if ($edit)
-                                          <input type="hidden" id="old_logo_situs" value="{{ $data->logo_situs }}" name="old_logo_situs">
-                                          <img src="{{ asset($data->logo_situs) }}" class="img-show-mini mt-2" alt="">
+                                          <input type="hidden" id="old_banner_company" value="{{ $data->banner_company }}" name="old_banner_company">
+                                          <img src="{{ asset($data->banner_company) }}" class="img-show-mini mt-2" alt="">
                                        @endif
+                                    </div>
+                                 </div>
+                                 <hr class="bg-info w-100" style="height: 1px">
+                                 <h4 class="col-12">Payment/Class</h4>
+                                 <div class="col-12 col-lg-6">
+                                    <div class="mb-3">
+                                       <label for="payment_class_1" class="form-label">Class 1</label>
+                                       <input value="{{ $edit ? $data->payment_class_1 : '' }}" type="text" id="payment_class_1" name="payment_class_1" class="form-control" placeholder="Class 1">
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6">
+                                    <div class="mb-3">
+                                       <label for="payment_class_2" class="form-label">Class 2</label>
+                                       <input value="{{ $edit ? $data->payment_class_2 : '' }}" type="text" id="payment_class_2" name="payment_class_2" class="form-control" placeholder="Class 2">
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6">
+                                    <div class="mb-3">
+                                       <label for="payment_class_3" class="form-label">Class 3</label>
+                                       <input value="{{ $edit ? $data->payment_class_3 : '' }}" type="text" id="payment_class_3" name="payment_class_3" class="form-control" placeholder="Class 3">
                                     </div>
                                  </div>
                               </div>
                               <div class="col-8 col-lg-4">
-                                 <button type="submit" class="btn btn-danger btn-simpan {{ $show ? 'd-none' : '' }}">Simpan</button>
+                                 <button type="submit" class="btn btn-danger btn-simpan {{ $show ? 'd-none' : '' }}">Save</button>
                               </div>
                            </form>
                         </div>
