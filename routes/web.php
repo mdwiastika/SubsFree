@@ -26,6 +26,10 @@ Route::get('/', function () {
     // Wait user template
     return redirect()->route('dashboard');
 });
+Route::get('/admin', function () {
+    // Wait user template
+    return redirect()->route('dashboard');
+});
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/my-profile', [UserController::class, 'myProfile'])->name('myProfile');
@@ -62,6 +66,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('other')->group(function () {
                 Route::get('/cariUser', [OtherController::class, 'cariUser'])->name('otherCariUser');
                 Route::get('/cariCategoryRoom', [OtherController::class, 'cariCategoryRoom'])->name('otherCariCategoryRoom');
+                Route::get('/cariRoom', [OtherController::class, 'cariRoom'])->name('otherCariRoom');
             });
         });
         Route::middleware('is_partner')->group(function () {

@@ -21,7 +21,7 @@ class IdentitasWebController extends Controller
         $data['title'] = $this->title;
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
-        $data['identitas_web'] = IdentitasWeb::query()->latest()->first();
+        $data['identitas_web'] = IdentitasWeb::query()->first();
         $data['edit'] = true;
         $data['id_identitas_web'] = $data['identitas_web']->id_identitas_web;
         $data['data'] = $data['identitas_web'];

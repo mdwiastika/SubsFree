@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryRoom;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,15 @@ class OtherController extends Controller
         if ($request->has('q')) {
             $search = $request->q;
             $data = User::where('name', 'like', "%$search%")->get();
+        }
+        return response()->json($data);
+    }
+    public function cariRoom(Request $request)
+    {
+        $data = [];
+        if ($request->has('q')) {
+            $search = $request->q;
+            $data = Room::where('name_room', 'like', "%$search%")->get();
         }
         return response()->json($data);
     }

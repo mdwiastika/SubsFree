@@ -41,7 +41,7 @@ class RoomController extends Controller
         $data['title'] = $this->title;
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
-        $data['identitas_web'] = Auth::user()->level_user == 'Pengguna' ? IdentitasWeb::query()->where('web_preferences_id', $data['web_preferences_id'])->first() : IdentitasWeb::query()->first();
+        $data['identitas_web'] = IdentitasWeb::query()->first();
 
         $data['edit'] = (!empty($request->id)) ? true : false;
         $data['id_room'] = (!empty($request->id)) ? $request->id : "";
