@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\OtherController;
 use App\Http\Controllers\Web\Admin\AuthController;
+use App\Http\Controllers\Web\Admin\CategoryRoomController;
 use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\IdentitasWebController;
+use App\Http\Controllers\Web\Admin\RoomController;
+use App\Http\Controllers\Web\Admin\TransactionRoomController;
+use App\Http\Controllers\Web\Admin\TransactionSubscriptionController;
 use App\Http\Controllers\Web\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,9 +45,41 @@ Route::middleware('auth')->group(function () {
                 Route::post('/destroy', [UserController::class, 'destroy'])->name('usersDestroy');
                 Route::post('/change-status', [UserController::class, 'changeStatus'])->name('changeStatusUsers');
             });
+            Route::prefix('category-room')->group(function () {
+                Route::get('/', [CategoryRoomController::class, 'index'])->name('categoryRoom');
+                Route::post('/datagrid', [CategoryRoomController::class, 'datagrid'])->name('categoryRoomDatagrid');
+                Route::post('/create', [CategoryRoomController::class, 'create'])->name('categoryRoomCreate');
+                Route::post('/store', [CategoryRoomController::class, 'store'])->name('categoryRoomStore');
+                Route::post('/destroy', [CategoryRoomController::class, 'destroy'])->name('categoryRoomDestroy');
+            });
+            Route::prefix('transaction-subscription')->group(function () {
+                Route::get('/', [TransactionSubscriptionController::class, 'index'])->name('transactionSubscription');
+                Route::post('/datagrid', [TransactionSubscriptionController::class, 'datagrid'])->name('transactionSubscriptionDatagrid');
+                Route::post('/create', [TransactionSubscriptionController::class, 'create'])->name('transactionSubscriptionCreate');
+                Route::post('/store', [TransactionSubscriptionController::class, 'store'])->name('transactionSubscriptionStore');
+                Route::post('/destroy', [TransactionSubscriptionController::class, 'destroy'])->name('transactionSubscriptionDestroy');
+            });
+            Route::prefix('other')->group(function () {
+                Route::get('/cariUser', [OtherController::class, 'cariUser'])->name('otherCariUser');
+                Route::get('/cariCategoryRoom', [OtherController::class, 'cariCategoryRoom'])->name('otherCariCategoryRoom');
+            });
         });
         Route::middleware('is_partner')->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::prefix('transaction-room')->group(function () {
+                Route::get('/', [TransactionRoomController::class, 'index'])->name('transactionRoom');
+                Route::post('/datagrid', [TransactionRoomController::class, 'datagrid'])->name('transactionRoomDatagrid');
+                Route::post('/create', [TransactionRoomController::class, 'create'])->name('transactionRoomCreate');
+                Route::post('/store', [TransactionRoomController::class, 'store'])->name('transactionRoomStore');
+                Route::post('/destroy', [TransactionRoomController::class, 'destroy'])->name('transactionRoomDestroy');
+            });
+            Route::prefix('room')->group(function () {
+                Route::get('/', [RoomController::class, 'index'])->name('room');
+                Route::post('/datagrid', [RoomController::class, 'datagrid'])->name('roomDatagrid');
+                Route::post('/create', [RoomController::class, 'create'])->name('roomCreate');
+                Route::post('/store', [RoomController::class, 'store'])->name('roomStore');
+                Route::post('/destroy', [RoomController::class, 'destroy'])->name('roomDestroy');
+            });
         });
     });
 });

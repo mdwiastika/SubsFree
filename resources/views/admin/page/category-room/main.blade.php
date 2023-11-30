@@ -74,8 +74,8 @@
 @section('js')
    <script type="text/javascript">
       var datagrid = $("#datagrid").datagrid({
-         url: "{!! route('usersDatagrid') !!}",
-         primaryField: 'id',
+         url: "{!! route('categoryRoomDatagrid') !!}",
+         primaryField: 'id_category_room',
          rowNumber: true,
          rowCheck: false,
          searchInputElement: '#search',
@@ -84,7 +84,7 @@
          optionPagingElement: '#option',
          pageInfoElement: '#info',
          columns: [{
-               field: 'name',
+               field: 'name_category_room',
                title: 'Name',
                editable: false,
                sortable: true,
@@ -93,8 +93,8 @@
                search: true
             },
             {
-               field: 'level_user',
-               title: 'Level',
+               field: 'slug_category_room',
+               title: 'Slug',
                editable: false,
                sortable: true,
                width: 200,
@@ -102,17 +102,8 @@
                search: true
             },
             {
-               field: 'email',
-               title: 'Email',
-               editable: false,
-               sortable: true,
-               width: 200,
-               align: 'left',
-               search: true
-            },
-            {
-               field: 'status_user',
-               title: 'Status',
+               field: 'icon_category_room',
+               title: 'Icon',
                editable: false,
                sortable: true,
                width: 200,
@@ -139,7 +130,7 @@
 
       function add(rowIndex) {
          $('.main-layer').hide();
-         $.post("{{ route('usersCreate') }}", {
+         $.post("{{ route('categoryRoomCreate') }}", {
             id: rowIndex
          }).done(function(data) {
             if (data.status == 'success') {
@@ -152,8 +143,8 @@
 
       function detail(rowIndex) {
          $('.main-layer').hide();
-         var id = datagrid.getRowData(rowIndex).id;
-         $.post("{!! route('usersCreate') !!}", {
+         var id = datagrid.getRowData(rowIndex).id_category_room;
+         $.post("{!! route('categoryRoomCreate') !!}", {
             id: id,
             show: 'ada',
          }).done(function(data) {
@@ -176,8 +167,8 @@
             confirmButtonText: 'Yes, Delete Data!',
          }).then((result) => {
             if (result.value) {
-               $.post("{{ route('usersDestroy') }}", {
-                  id: rowData.id
+               $.post("{{ route('categoryRoomDestroy') }}", {
+                  id: rowData.id_category_room
                }).done(function(data) {
                   if (data.status == 'success') {
                      swal('Success', data.message, "success");
@@ -204,11 +195,11 @@
             @if (Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Super Admin')
                if ("{{ Auth::user()->level_user }}" == 'Admin') {
                   if (rowData.level_user_check != 'Admin') {
-                     tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id +
+                     tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_category_room +
                         '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
                   }
                } else {
-                  tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id +
+                  tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_category_room +
                      '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
                }
                tag += '<a href="javascript:void(0);" onclick="deleted(' + rowIndex +
@@ -216,35 +207,6 @@
             }
          @endif
          return tag;
-      }
-
-      function changeStatus(id) {
-         swal({
-            title: "Apakah Anda yakin ingin mengubah status data ini ?",
-            text: "Data akan di ubah statusnya !",
-            type: "warning",
-            showCancelButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Change Status!',
-         }).then((result) => {
-            if (result.value) {
-               $.post("{{ route('changeStatusUsers') }}", {
-                  id: id
-               }).done(function(data) {
-                  if (data.status == 'success') {
-                     swal('Success', data.message, "success");
-                  } else {
-                     swal('Sorry!', data.message, "warning");
-                  }
-                  datagrid.reload();
-               }).fail(function() {
-                  swal('', "Cancel Status Change!", "error");
-               });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-               Swal('Batal', 'Cancel Status Change!', 'error')
-               datagrid.reload();
-            }
-         });
       }
    </script>
 @endsection

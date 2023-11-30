@@ -31,8 +31,10 @@
                                     <label for="proof_authenticity">Proof Authenticity (Optional)</label>
                                     <input type="file" class="form-control" name="proof_authenticity" onchange="readURL(this)" accept=".png,.jpg,.jpeg">
                                     @if ($edit)
-                                       <input type="hidden" id="old_proof_authenticity" value="{{ $data->proof_authenticity }}" name="old_proof_authenticity">
-                                       <img src="{{ asset($data->proof_authenticity) }}" class="img-show mt-2" alt="">
+                                       @if ($data->proof_authenticity)
+                                          <input type="hidden" id="old_proof_authenticity" value="{{ $data->proof_authenticity }}" name="old_proof_authenticity">
+                                          <img src="{{ asset($data->proof_authenticity) }}" class="img-show mt-2" alt="">
+                                       @endif
                                     @endif
                                  </div>
                                  <div class="form-group col-12 col-md-6">
@@ -98,13 +100,13 @@
       }
 
       function error_validate(message) {
-         swal("MAAF !", message, "warning");
-         $('.btn-simpan').html('Simpan').removeAttr('disabled');
+         swal("Sorry !", message, "warning");
+         $('.btn-simpan').html('Save').removeAttr('disabled');
       }
 
       $('.btn-simpan').click((e) => {
          e.preventDefault();
-         $('.btn-simpan').html('Proses Simpan').attr('disabled', true);
+         $('.btn-simpan').html('Proses Save').attr('disabled', true);
          ajaxSimpan();
       });
 
@@ -121,14 +123,14 @@
             processData: false,
             success: function(data) {
                if (data.status == 'success') {
-                  swal('Berhasil', data.message, 'success');
-                  $('.btn-simpan').html('Simpan').attr('disabled', false);
+                  swal('Success', data.message, 'success');
+                  $('.btn-simpan').html('Save').attr('disabled', false);
                } else {
                   return error_validate(`${data.message}`);
                }
             }
          }).fail(function() {
-            return error_validate('Terjadi Kesalahan, Silahkan Ulangi Kembali !!');
+            return error_validate('An Error Occurred, Please Try Again !!');
          });
       }
    </script>>

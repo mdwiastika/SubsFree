@@ -45,6 +45,15 @@
                </a>
             </li>
             @if (Auth::check())
+               <li class="nav-header">DATA WEBSITE</li>
+               @if (Auth::user()->level_user == 'Super Admin')
+                  <li class="nav-item">
+                     <a href="{{ route('identitasWeb') }}" class="nav-link {{ $menu == 'identitas-web' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-laptop-code"></i>
+                        <p>Web Identity</p>
+                     </a>
+                  </li>
+               @endif
                @if (in_array(Auth::user()->level_user, ['Super Admin', 'Admin']))
                   <li class="nav-header">DATA MASTER</li>
                   <li class="nav-item">
@@ -53,14 +62,34 @@
                         <p>Users</p>
                      </a>
                   </li>
-                  @if (Auth::user()->level_user == 'Super Admin')
-                     <li class="nav-item">
-                        <a href="{{ route('identitasWeb') }}" class="nav-link {{ $menu == 'identitas-web' ? 'active' : '' }}">
-                           <i class="nav-icon fas fa-laptop-code"></i>
-                           <p>Web Identity</p>
-                        </a>
-                     </li>
-                  @endif
+                  <li class="nav-item">
+                     <a href="{{ route('categoryRoom') }}" class="nav-link {{ $menu == 'category-room' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Category Room</p>
+                     </a>
+                  </li>
+               @endif
+               @if (in_array(Auth::user()->level_user, ['Super Admin', 'Admin', 'Partner']))
+                  <li class="nav-item">
+                     <a href="{{ route('room') }}" class="nav-link {{ $menu == 'room' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-door-open"></i>
+                        <p>Room</p>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="{{ route('transactionRoom') }}" class="nav-link {{ $menu == 'transaction-room' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>Transaction Room</p>
+                     </a>
+                  </li>
+               @endif
+               @if (in_array(Auth::user()->level_user, ['Super Admin', 'Admin']))
+                  <li class="nav-item">
+                     <a href="{{ route('transactionSubscription') }}" class="nav-link {{ $menu == 'transaction-subscription' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>Subscription</p>
+                     </a>
+                  </li>
                @endif
             @endif
          </ul>

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete();
             $table->string('name_room');
             $table->string('slug_room')->nullable();
-            $table->string('location');
+            $table->string('location_room');
+            $table->longText('photo_room');
             $table->string('description_room');
             $table->enum('level_room', ['Class 1', 'Class 2', 'Class 3']);
             $table->timestamps();

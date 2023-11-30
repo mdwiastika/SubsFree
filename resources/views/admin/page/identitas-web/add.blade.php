@@ -86,8 +86,10 @@
                                        <label for="banner_company" class="form-label">Banner Company</label>
                                        <input type="file" onchange="readURL(this)" accept=".png,.jpg,.jpeg" id="banner_company" name="banner_company" class="form-control">
                                        @if ($edit)
-                                          <input type="hidden" id="old_banner_company" value="{{ $data->banner_company }}" name="old_banner_company">
-                                          <img src="{{ asset($data->banner_company) }}" class="img-show-mini mt-2" alt="">
+                                          @if ($data->banner_company)
+                                             <input type="hidden" id="old_banner_company" value="{{ $data->banner_company }}" name="old_banner_company">
+                                             <img src="{{ asset($data->banner_company) }}" class="img-show-mini mt-2" alt="">
+                                          @endif
                                        @endif
                                     </div>
                                  </div>
@@ -166,13 +168,13 @@
       }
 
       function error_validate(message) {
-         swal("MAAF !", message, "warning");
-         $('.btn-simpan').html('Simpan').removeAttr('disabled');
+         swal("Success !", message, "warning");
+         $('.btn-simpan').html('Save').removeAttr('disabled');
       }
 
       $('.btn-simpan').click((e) => {
          e.preventDefault();
-         $('.btn-simpan').html('Proses Simpan').attr('disabled', true);
+         $('.btn-simpan').html('Proses Save').attr('disabled', true);
          ajaxSimpan();
       });
 
@@ -189,14 +191,14 @@
             processData: false,
             success: function(data) {
                if (data.status == 'success') {
-                  swal('Berhasil', data.message, 'success');
+                  swal('Success', data.message, 'success');
                   $('.btn-simpan').html('Simpan').attr('disabled', false);
                } else {
                   return error_validate(`${data.message}`);
                }
             }
          }).fail(function() {
-            return error_validate('Terjadi Kesalahan, Silahkan Ulangi Kembali !!');
+            return error_validate('An Error Occurred, Please Try Again !!');
          });
       }
    </script>>
