@@ -77,7 +77,15 @@ class IdentitasWebController extends Controller
         $identitas_web->facebook_company = $request->facebook_company;
         $identitas_web->instagram_company = $request->instagram_company;
         $identitas_web->title_banner_company = $request->title_banner_company;
-        $identitas_web->video_company = $request->video_company;
+        $video_company = $request->video_company;
+        if (!empty($request->video_company)) {
+            if (str_contains($request->video_company, 'watch?v=')) {
+                $video_company = str_replace('watch?v=', 'embed/', $request->video_company);
+            } elseif (str_contains($request->video_company, 'youtu.be/')) {
+                $video_company = str_replace('youtu.be/', 'youtube.com/embed/', $request->video_company);
+            }
+        }
+        $identitas_web->video_company = $video_company;
         $identitas_web->payment_class_1 = $request->payment_class_1;
         $identitas_web->payment_class_2 = $request->payment_class_2;
         $identitas_web->payment_class_3 = $request->payment_class_3;

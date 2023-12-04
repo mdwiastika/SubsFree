@@ -17,15 +17,13 @@
          }
       }
    </style>
-   <section class="hero w-full max-h-screen bg-cover lg:aspect-video bg-no-repeat flex justify-center items-center flex-col p-2 hover:bg-blend-darken" style="background-image: url({{ $identitas_web->banner_company ? asset($identitas_web->banner_company) : asset('/template-user/dist/image/banner.png') }})" id="hero">
+   <section class="hero w-full h-screen max-h-screen bg-cover lg:aspect-video bg-no-repeat flex justify-center items-center flex-col p-2 hover:bg-blend-darken" style="background-image: url({{ $identitas_web->banner_company ? asset($identitas_web->banner_company) : asset('/template-user/dist/image/banner.png') }})" id="hero">
       <h1 class="text-white text-4xl leading-normal text-center font-semibold font-inter tracking-wide md:text-6xl md:font-bold mb-4 lg:text-7xl lg:font-bold xl:text-9xl xl:font-bold xl:p-10">{{ $identitas_web->title_banner_company }}</h1>
       <form class="block lg:flex justify-center items-center gap-3">
          <div class="mt-2">
             <div class="relative bg-white/60 backdrop-blur-sm flex justify-center items-center p-0 px-4 rounded-full w-full">
-               <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                  <path
-                     d="M17.5017 17.5007L13.7632 13.7555L17.5017 17.5007ZM15.835 8.75032C15.835 10.629 15.0887 12.4308 13.7602 13.7592C12.4318 15.0876 10.6301 15.834 8.75136 15.834C6.87266 15.834 5.07091 15.0876 3.74247 13.7592C2.41403 12.4308 1.66772 10.629 1.66772 8.75032C1.66772 6.87162 2.41403 5.06987 3.74247 3.74144C5.07091 2.413 6.87266 1.66669 8.75136 1.66669C10.6301 1.66669 12.4318 2.413 13.7602 3.74144C15.0887 5.06987 15.835 6.87162 15.835 8.75032V8.75032Z"
-                     stroke="white" stroke-width="2.00002" stroke-linecap="round" />
+               <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                  <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
                </svg>
                <input type="text" class="bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white md:py-3" name="location" id="location" placeholder="Location">
             </div>
@@ -47,11 +45,11 @@
          </div>
       </form>
    </section>
-   <section class="flex flex-col justify-center items-center py-6 md:py-10 lg:py-16 container mx-auto lg:flex-row lg:justify-around" id="different-us">
-      <h2 class="text-5xl font-bold flex-1 mb-4 lg:mb-0 max-w-[340px]">What Make Us Different?</h2>
-      <p class="flex-1 max-w-[400px] text-gray-600 text-justify">We pride ourselves on offering a diverse and extensive selection of rooms to cater to various preferences and needs. Whether you're looking for a cozy private space or a shared room with vibrant communal vibes, our marketplace has it all.</p>
+   <section class="flex flex-col justify-center items-center px-4 py-6 md:py-10 lg:py-14 container mx-auto lg:flex-row lg:justify-evenly" id="different-us">
+      <h2 class="text-3xl md:text-5xl font-bold flex-1 mb-4 lg:mb-0 max-w-[390px] text-left md:text-center">What Make <span class="text-[#FA8B02]">Us Different?</span></h2>
+      <p class="flex-1 max-w-[650px] text-gray-600 text-justify">We pride ourselves on offering a diverse and extensive selection of rooms to cater to various preferences and needs. Whether you're looking for a cozy private space or a shared room with vibrant communal vibes, our marketplace has it all.</p>
    </section>
-   <section class="container mx-auto py-6 md:py-10 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+   <section class="container mx-auto py-6 md:py-10 lg:py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4">
       <div class="shadow-md rounded-md py-3 px-5">
          <div class="bg-[#F1E14C3B] w-16 h-16 rounded-full flex justify-center items-center">
             <div class="bg-[#FA8B02] w-12 h-12 rounded-full flex justify-center items-center">
@@ -117,10 +115,92 @@
          </p>
       </div>
    </section>
+   <section class="container mx-auto py-6 md:py-10 lg:py-14 px-4">
+      <div class="flex flex-col items-center lg:flex-row lg:justify-evenly lg:items-center gap-2">
+         <div class="flex-1 max-w-[390px] lg:max-w-[450px]">
+            <h2 class="text-xl font-light mb-2 text-left md:text-center lg:text-left hidden md:block">Popular destination room</h2>
+            <h3 class="text-3xl md:text-5xl font-bold mb-4 lg:mb-6 text-left">Ultimate Travel <span class="text-[#FA8B02]">Experience</span></h3>
+            <p class="text-justify text-gray-600">Our user-friendly platform ensures a hassle-free booking experience. From browsing available rooms to making secure payments, we prioritize simplicity and efficiency in every step of the process.</p>
+         </div>
+         <div class="swiper w-[300px] h-[450px] md:w-[600px] xl:w-[700px] mt-4 lg:mt-0 m-0">
+            <div class="swiper-wrapper">
+               <div class="swiper-slide rounded-lg border border-blue-500 flex justify-center items-center p-3 hover:p-0 transition-all duration-300">
+                  <div class="rounded-lg overflow-hidden w-full h-full bg-cover py-5 px-3 flex flex-col justify-between bg-slate-600/40 bg-blend-darken" style="background-image: url('{{ asset('/template-user/dist/image/slider/slider1.webp') }}')">
+                     <div class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+                           <path d="M8 10C6.9 10 6 9.1 6 8C6 6.9 6.9 6 8 6C9.1 6 10 6.9 10 8C10 9.1 9.1 10 8 10ZM14 8.2C14 4.57 11.35 2 8 2C4.65 2 2 4.57 2 8.2C2 10.54 3.95 13.64 8 17.34C12.05 13.64 14 10.54 14 8.2ZM8 0C12.2 0 16 3.22 16 8.2C16 11.52 13.33 15.45 8 20C2.67 15.45 0 11.52 0 8.2C0 3.22 3.8 0 8 0Z" fill="white" />
+                        </svg>
+                        <span class="text-white">&nbsp;Jakarta</span>
+                     </div>
+                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <span class="text-white">Check-In Now</span>
+                     </a>
+                  </div>
+               </div>
+               <div class="swiper-slide rounded-lg border border-blue-500 flex justify-center items-center p-3 hover:p-0 transition-all duration-300">
+                  <div class="rounded-lg overflow-hidden w-full h-full bg-cover py-5 px-3 flex flex-col justify-between bg-slate-600/40 bg-blend-darken" style="background-image: url('{{ asset('/template-user/dist/image/slider/slider2.webp') }}')">
+                     <div class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+                           <path d="M8 10C6.9 10 6 9.1 6 8C6 6.9 6.9 6 8 6C9.1 6 10 6.9 10 8C10 9.1 9.1 10 8 10ZM14 8.2C14 4.57 11.35 2 8 2C4.65 2 2 4.57 2 8.2C2 10.54 3.95 13.64 8 17.34C12.05 13.64 14 10.54 14 8.2ZM8 0C12.2 0 16 3.22 16 8.2C16 11.52 13.33 15.45 8 20C2.67 15.45 0 11.52 0 8.2C0 3.22 3.8 0 8 0Z" fill="white" />
+                        </svg>
+                        <span class="text-white">&nbsp;Surabaya</span>
+                     </div>
+                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <span class="text-white">Check-In Now</span>
+                     </a>
+                  </div>
+               </div>
+               <div class="swiper-slide rounded-lg border border-blue-500 flex justify-center items-center p-3 hover:p-0 transition-all duration-300">
+                  <div class="rounded-lg overflow-hidden w-full h-full bg-cover py-5 px-3 flex flex-col justify-between bg-slate-600/40 bg-blend-darken" style="background-image: url('{{ asset('/template-user/dist/image/slider/slider3.jpg') }}')">
+                     <div class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+                           <path d="M8 10C6.9 10 6 9.1 6 8C6 6.9 6.9 6 8 6C9.1 6 10 6.9 10 8C10 9.1 9.1 10 8 10ZM14 8.2C14 4.57 11.35 2 8 2C4.65 2 2 4.57 2 8.2C2 10.54 3.95 13.64 8 17.34C12.05 13.64 14 10.54 14 8.2ZM8 0C12.2 0 16 3.22 16 8.2C16 11.52 13.33 15.45 8 20C2.67 15.45 0 11.52 0 8.2C0 3.22 3.8 0 8 0Z" fill="white" />
+                        </svg>
+                        <span class="text-white">&nbsp;Jogjakarta</span>
+                     </div>
+                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <span class="text-white">Check-In Now</span>
+                     </a>
+                  </div>
+               </div>
+               <div class="swiper-slide rounded-lg border border-blue-500 flex justify-center items-center p-3 hover:p-0 transition-all duration-300">
+                  <div class="rounded-lg overflow-hidden w-full h-full bg-cover py-5 px-3 flex flex-col justify-between bg-slate-600/40 bg-blend-darken" style="background-image: url('{{ asset('/template-user/dist/image/slider/slider4.jpg') }}')">
+                     <div class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+                           <path d="M8 10C6.9 10 6 9.1 6 8C6 6.9 6.9 6 8 6C9.1 6 10 6.9 10 8C10 9.1 9.1 10 8 10ZM14 8.2C14 4.57 11.35 2 8 2C4.65 2 2 4.57 2 8.2C2 10.54 3.95 13.64 8 17.34C12.05 13.64 14 10.54 14 8.2ZM8 0C12.2 0 16 3.22 16 8.2C16 11.52 13.33 15.45 8 20C2.67 15.45 0 11.52 0 8.2C0 3.22 3.8 0 8 0Z" fill="white" />
+                        </svg>
+                        <span class="text-white">&nbsp;Bali</span>
+                     </div>
+                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                        <span class="text-white">Check-In Now</span>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="container mx-auto py-6 md:py-10 lg:py-14 px-4 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly">
+      <div>
+         <h2 class="text-2xl md:text-3xl font-bold mb-4 lg:mb-6 text-left max-w-[350px] lg:max-w-[400px]"><span class="border-b-4 border-[#FA8B02]">Get Ready</span> to Unwind</h2>
+         <p class="text-gray-600 max-w-[390px] lg:max-w-[450px] text-justify">Enjoy the flexibility of choosing subscription plans that suit your lifestyle. Whether you need short-term arrangements or long-term commitments, our marketplace offers a range of plans to accommodate your unique requirements.</p>
+      </div>
+      <div class="w-[300px] md:w-[560px] xl:w-[700px] flex justify-center rounded-lg overflow-hidden">
+         <iframe width="560" height="315" src="{{ $identitas_web->video_company }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+   </section>
+   <section class="py-6 md:py-10 lg:py-14 px-4 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly bg-no-repeat bg-cover h-[400px] bg-gray-600/60 bg-blend-darken gap-3" style="background-image: url('{{ asset('/template-user/dist/image/banner-contact.png') }}')">
+      <div class="text-white max-w-[390px] lg:max-w-[450px]">
+         <h2 class="text-4xl font-light">Plan your trip with a comfortable room</h2>
+         <p class="text-gray-200">Our professional advisors can put together your perfect vacation home</p>
+      </div>
+      <div>
+         <a class="hover:bg-gray-300 hover:text-black transition-all duration-300 py-1 px-3 border rounded-full border-white text-white cursor-pointer" href="https://wa.me/{{ $identitas_web->no_wa_company }}" target="_blank">Contact Us</a>
+      </div>
+   </section>
 @endsection
 @section('js')
    <script>
-      console.log('oke')
       let today = new Date();
       let minDate = new Date(today);
       minDate.setDate(today.getDate() + 1);
@@ -129,7 +209,6 @@
       $('#start_date').attr('min', format_min_date);
 
       function formatDate(date) {
-         console.log('oke');
          var day = ("0" + date.getDate()).slice(-2);
          var month = ("0" + (date.getMonth() + 1)).slice(-2);
          var year = date.getFullYear();
@@ -144,6 +223,32 @@
             max_date.setDate(max_date.getDate() + 10);
             $('#end_date').attr('min', formatDate(min_date));
             $('#end_date').attr('max', formatDate(max_date));
+         }
+      });
+   </script>
+   <script>
+      const swiper = new Swiper('.swiper', {
+         direction: 'horizontal',
+         loop: true,
+         speed: 400,
+         slidesPerView: 1,
+         spaceBetween: 10,
+         breakpoints: {
+            320: {
+               slidesPerView: 1,
+               spaceBetween: 20
+            },
+            480: {
+               slidesPerView: 1,
+               spaceBetween: 30
+            },
+            771: {
+               slidesPerView: 2,
+               spaceBetween: 40
+            },
+         },
+         autoplay: {
+            delay: 3500,
          }
       });
    </script>
