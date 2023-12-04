@@ -28,16 +28,16 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
          <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
             <li>
-               <a href="#" class="text-base line block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'home' ? 'md:text-[#FA8B02] bg-[#FA8B02]' : '' }} md:p-0">Home</a>
+               <a href="{{ route('home') }}" class="text-base line font-semibold block py-2 px-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'home' ? 'md:text-[#FA8B02] bg-[#FA8B02] text-white' : 'text-gray-900 hover:bg-gray-100' }} md:p-0">Home</a>
             </li>
             <li>
-               <a href="#" class="text-base tracking-wide font-semibold block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'rooms' ? 'md:text-[#FA8B02] bg-[#FA8B02]' : '' }} md:p-0">Get Rooms</a>
+               <a href="{{ route('userRooms') }}" class="text-base line font-semibold block py-2 px-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'rooms' ? 'md:text-[#FA8B02] bg-[#FA8B02] text-white' : 'text-gray-900 hover:bg-gray-100' }} md:p-0">Get Rooms</a>
             </li>
             <li>
-               <a href="#" class="text-base tracking-wide font-semibold block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'about' ? 'md:text-[#FA8B02] bg-[#FA8B02]' : '' }} md:p-0">About</a>
+               <a href="{{ route('userAbout') }}" class="text-base line font-semibold block py-2 px-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'about' ? 'md:text-[#FA8B02] bg-[#FA8B02] text-white' : 'text-gray-900 hover:bg-gray-100' }} md:p-0">About</a>
             </li>
             <li>
-               <a href="#" class="text-base tracking-wide font-semibold block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'subscription' ? 'md:text-[#FA8B02] bg-[#FA8B02]' : '' }} md:p-0">Subscription</a>
+               <a href="{{ route('userSubscriptionUser') }}" class="text-base line font-semibold block py-2 px-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-[#FA8B02] {{ $menu == 'subscription' ? 'md:text-[#FA8B02] bg-[#FA8B02] text-white' : 'text-gray-900 hover:bg-gray-100' }} md:p-0">Subscription</a>
             </li>
          </ul>
       </div>

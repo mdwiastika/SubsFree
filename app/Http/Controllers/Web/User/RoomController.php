@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    protected $title = 'Home';
-    protected $menu = 'home';
+    protected $title = 'Rooms';
+    protected $menu = 'rooms';
     protected $sub_menu = '';
-    protected $direktori = 'user.page.home';
+    protected $direktori = 'user.page.room';
     public function main(Request $request)
     {
         $data['title'] = $this->title;

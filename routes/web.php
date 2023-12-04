@@ -9,7 +9,10 @@ use App\Http\Controllers\Web\Admin\RoomController;
 use App\Http\Controllers\Web\Admin\TransactionRoomController;
 use App\Http\Controllers\Web\Admin\TransactionSubscriptionController;
 use App\Http\Controllers\Web\Admin\UserController;
+use App\Http\Controllers\Web\User\AboutController;
 use App\Http\Controllers\Web\User\HomeController;
+use App\Http\Controllers\Web\User\RoomController as UserRoomController;
+use App\Http\Controllers\Web\User\SubscriptionUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +27,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'main'])->name('home');
+Route::get('/about', [AboutController::class, 'main'])->name('userAbout');
+Route::get('/rooms', [UserRoomController::class, 'main'])->name('userRooms');
+Route::get('/rooms/{slug_room}', [UserRoomController::class, 'detail'])->name('userRoomDetail');
+Route::get('/subscription', [SubscriptionUserController::class, 'main'])->name('userSubscriptionUser');
 Route::get('/admin', function () {
     // Wait user template
     return redirect()->route('dashboard');

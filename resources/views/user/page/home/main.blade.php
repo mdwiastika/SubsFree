@@ -17,7 +17,7 @@
          }
       }
    </style>
-   <section class="hero w-full h-screen max-h-screen bg-cover lg:aspect-video bg-no-repeat flex justify-center items-center flex-col p-2 hover:bg-blend-darken" style="background-image: url({{ $identitas_web->banner_company ? asset($identitas_web->banner_company) : asset('/template-user/dist/image/banner.png') }})" id="hero">
+   <section id="hero" class="hero w-full h-screen max-h-screen bg-cover lg:aspect-video bg-no-repeat flex justify-center items-center flex-col p-2 hover:bg-blend-darken" style="background-image: url({{ $identitas_web->banner_company ? asset($identitas_web->banner_company) : asset('/template-user/dist/image/banner.png') }})">
       <h1 class="text-white text-4xl leading-normal text-center font-semibold font-inter tracking-wide md:text-6xl md:font-bold mb-4 lg:text-7xl lg:font-bold xl:text-9xl xl:font-bold xl:p-10">{{ $identitas_web->title_banner_company }}</h1>
       <form class="block lg:flex justify-center items-center gap-3">
          <div class="mt-2">
@@ -45,11 +45,11 @@
          </div>
       </form>
    </section>
-   <section class="flex flex-col justify-center items-center px-4 py-6 md:py-10 lg:py-14 container mx-auto lg:flex-row lg:justify-evenly" id="different-us">
+   <section id="different-us" class="flex flex-col justify-center items-center px-4 py-6 md:py-10 lg:py-14 container mx-auto lg:flex-row lg:justify-evenly">
       <h2 class="text-3xl md:text-5xl font-bold flex-1 mb-4 lg:mb-0 max-w-[390px] text-left md:text-center">What Make <span class="text-[#FA8B02]">Us Different?</span></h2>
       <p class="flex-1 max-w-[650px] text-gray-600 text-justify">We pride ourselves on offering a diverse and extensive selection of rooms to cater to various preferences and needs. Whether you're looking for a cozy private space or a shared room with vibrant communal vibes, our marketplace has it all.</p>
    </section>
-   <section class="container mx-auto py-6 md:py-10 lg:py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4">
+   <section id="features" class="container mx-auto py-6 md:py-10 lg:py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4">
       <div class="shadow-md rounded-md py-3 px-5">
          <div class="bg-[#F1E14C3B] w-16 h-16 rounded-full flex justify-center items-center">
             <div class="bg-[#FA8B02] w-12 h-12 rounded-full flex justify-center items-center">
@@ -115,7 +115,7 @@
          </p>
       </div>
    </section>
-   <section class="container mx-auto py-6 md:py-10 lg:py-14 px-4">
+   <section id="popular-room" class="container mx-auto py-6 md:py-10 lg:py-14 px-4">
       <div class="flex flex-col items-center lg:flex-row lg:justify-evenly lg:items-center gap-2">
          <div class="flex-1 max-w-[390px] lg:max-w-[450px]">
             <h2 class="text-xl font-light mb-2 text-left md:text-center lg:text-left hidden md:block">Popular destination room</h2>
@@ -180,7 +180,7 @@
          </div>
       </div>
    </section>
-   <section class="container mx-auto py-6 md:py-10 lg:py-14 px-4 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly">
+   <section id="video-company" class="container mx-auto py-6 md:py-10 lg:py-14 px-4 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly">
       <div>
          <h2 class="text-2xl md:text-3xl font-bold mb-4 lg:mb-6 text-left max-w-[350px] lg:max-w-[400px]"><span class="border-b-4 border-[#FA8B02]">Get Ready</span> to Unwind</h2>
          <p class="text-gray-600 max-w-[390px] lg:max-w-[450px] text-justify">Enjoy the flexibility of choosing subscription plans that suit your lifestyle. Whether you need short-term arrangements or long-term commitments, our marketplace offers a range of plans to accommodate your unique requirements.</p>
@@ -189,7 +189,7 @@
          <iframe width="560" height="315" src="{{ $identitas_web->video_company }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
    </section>
-   <section class="py-6 md:py-10 lg:py-14 px-4 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly bg-no-repeat bg-cover h-[400px] bg-gray-600/60 bg-blend-darken gap-3" style="background-image: url('{{ asset('/template-user/dist/image/banner-contact.png') }}')">
+   <section id="contact" class="py-6 md:py-10 lg:py-14 px-4 flex justify-center items-center flex-col lg:flex-row lg:justify-evenly bg-no-repeat bg-cover h-[400px] bg-gray-600/60 bg-blend-darken gap-3" style="background-image: url('{{ asset('/template-user/dist/image/banner-contact.png') }}')">
       <div class="text-white max-w-[390px] lg:max-w-[450px]">
          <h2 class="text-4xl font-light">Plan your trip with a comfortable room</h2>
          <p class="text-gray-200">Our professional advisors can put together your perfect vacation home</p>
