@@ -9,6 +9,7 @@ use App\Http\Controllers\Web\Admin\RoomController;
 use App\Http\Controllers\Web\Admin\TransactionRoomController;
 use App\Http\Controllers\Web\Admin\TransactionSubscriptionController;
 use App\Http\Controllers\Web\Admin\UserController;
+use App\Http\Controllers\Web\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // Wait user template
-    return redirect()->route('dashboard');
-});
+Route::get('/', [HomeController::class, 'main'])->name('home');
 Route::get('/admin', function () {
     // Wait user template
     return redirect()->route('dashboard');
@@ -91,4 +89,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
 });
