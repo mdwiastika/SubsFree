@@ -19,10 +19,6 @@
                            <td>{{ $data->user->name }}</td>
                         </tr>
                         <tr>
-                           <td>Transaction ID</td>
-                           <td>{{ $data->transaction_id }}</td>
-                        </tr>
-                        <tr>
                            <td>Order ID</td>
                            <td>{{ $data->external_id }}</td>
                         </tr>

@@ -31,6 +31,7 @@ class SubscriptionUserController extends Controller
 
         $identitas_web = IdentitasWeb::query()->first();
         $external_id = Str::uuid();
+        $interval_unpayment = 1;
         $amount = 0;
         if (Auth::user()->level_subscription == 'Class 1') {
             $amount = $identitas_web->payment_class_1;
@@ -43,7 +44,8 @@ class SubscriptionUserController extends Controller
         $date_subscription = '';
         $transaction_subscription_latest = TransactionSubscription::query()->where('user_id', Auth::id())->where('status', 'Paid')->latest()->first();
         if ($transaction_subscription_latest) {
-            $date_subscription_latest = Carbon::now($transaction_subscription_latest->date_subscription);
+            $date_subscription_latest = Carbon::parse($transaction_subscription_latest->date_subscription, 'UTC');
+            $interval_unpayment = Carbon::now()->diffInMonths($date_subscription_latest);
             if (Carbon::now()->diffInMonths($date_subscription_latest)) {
                 $date_subscription = $date_subscription_latest->addMonth();
             } else {
@@ -55,6 +57,7 @@ class SubscriptionUserController extends Controller
         }
         if ($data['subscription_valid']) {
             $data['message'] = 'You have already paid for your subscription for this month';
+            $snapToken = null;
         } else {
             $transaction_subscription = TransactionSubscription::create([
                 'user_id' => Auth::id(),
@@ -82,7 +85,6 @@ class SubscriptionUserController extends Controller
                 ),
             );
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-            $interval_unpayment = Carbon::now()->diffInMonths($date_subscription_latest);
             $data['message'] = "You haven't paid for $interval_unpayment months, please pay now";
         }
         $data['title'] = $this->title;
@@ -97,12 +99,16 @@ class SubscriptionUserController extends Controller
         $server_key = config('midtrans.server_key');
         $hashed = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $server_key);
         if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'capture') {
+            if (in_array($request->transaction_status, ['capture', 'settlement'])) {
                 $transaction_subscription = TransactionSubscription::query()->where('external_id', $request->order_id)->first();
                 $transaction_subscription->update([
                     'status' => 'Paid',
+                    'payment_type' => $request->payment_type,
                 ]);
             }
+            return $transaction_subscription;
+        } else {
+            return "Kosong";
         }
     }
 }

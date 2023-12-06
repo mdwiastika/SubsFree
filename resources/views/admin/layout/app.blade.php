@@ -5,6 +5,7 @@
    <meta name="csrf-token" content="{{ csrf_token() }}" />
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
    <!-- Favicon icon -->
    <link rel="icon" type="image/x-icon" sizes="16x16" href="{{ $identitas_web->logo_situs ? asset('/' . $identitas_web->logo_situs) : asset('/template-admin/dist/img/favicon.png') }}">
 

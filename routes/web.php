@@ -38,7 +38,6 @@ Route::get('/admin', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/subscription', [SubscriptionUserController::class, 'main'])->name('userSubscriptionUser');
     Route::get('/subscription/payment', [SubscriptionUserController::class, 'createPayment'])->name('createPaymentSubscription');
-    Route::post('/subscription/midtrans-callback', [SubscriptionUserController::class, 'callbackPayment']);
     Route::get('/history-transactions', [HistoryTransactionController::class, 'main'])->name('historyTransaction');
     Route::prefix('admin')->group(function () {
         Route::get('/my-profile', [UserController::class, 'myProfile'])->name('myProfile');

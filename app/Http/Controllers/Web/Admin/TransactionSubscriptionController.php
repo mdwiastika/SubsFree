@@ -28,11 +28,17 @@ class TransactionSubscriptionController extends Controller
     {
         $data = TransactionSubscription::getData($request);
         foreach ($data['rows'] as $key => $dt) {
-            $dt->transaction_status = "
-                <a href='javascript:void(0)' class='btn btn-sm btn-success'>$dt->transaction_status</a>
-                ";
+            if ($dt->status == 'Paid') {
+                $dt->status = "
+                    <a href='javascript:void(0)' class='btn btn-sm btn-success'>$dt->status</a>
+                    ";
+            } else {
+                $dt->status = "
+                    <a href='javascript:void(0)' class='btn btn-sm btn-danger'>$dt->status</a>
+                    ";
+            }
             $dt->name_user = User::find($dt->user_id)['name'];
-            $dt->gross_amount = "Rp. " . number_format($dt->gross_amount, 0, ',', '.');
+            $dt->amount = "Rp. " . number_format($dt->amount, 0, ',', '.');
         }
         return response()->json($data);
     }
