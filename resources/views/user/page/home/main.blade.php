@@ -28,12 +28,12 @@
                <input type="text" class="bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white md:py-3" name="location" id="location" placeholder="Location">
             </div>
          </div>
-         <div class="hidden md:flex md:gap-2">
+         <div class="block md:flex md:gap-2">
             <div class="mt-2 relative bg-white/60 backdrop-blur-sm flex justify-center items-center p-0 px-4 rounded-full w-full">
-               <input type="date" class="relative -left-6 md:-left-4 px-10 md:py-3 before:content-['Start Date'] bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white" name="start_date" id="start_date">
+               <input type="date" onfocus="this.blur()" onclick="this.blur()" class="relative -left-6 md:-left-4 px-10 md:py-3 before:content-['Start Date'] bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white" name="start_date" id="start_date">
             </div>
             <div class=" mt-2 relative bg-white/60 backdrop-blur-sm flex justify-center items-center p-0 px-4 rounded-full w-full">
-               <input type="date" disabled class="relative -left-6 md:-left-4 px-10 md:py-3 before:content-['Start Date'] bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white" name="end_date" id="end_date">
+               <input type="date" onfocus="this.blur()" onclick="this.blur()" disabled class="relative -left-6 md:-left-4 px-10 md:py-3 before:content-['Start Date'] bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white" name="end_date" id="end_date">
             </div>
          </div>
          <div class="mt-2 flex justify-center">

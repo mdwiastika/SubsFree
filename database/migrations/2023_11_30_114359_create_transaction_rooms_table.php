@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('id_transaction_room');
             $table->foreignId('room_id')->constrained('rooms', 'id_room')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete();
+            $table->string('no_receipt')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

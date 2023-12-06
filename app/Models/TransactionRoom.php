@@ -10,6 +10,7 @@ class TransactionRoom extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_transaction_room';
+    protected $guarded = ['id_transaction_room'];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

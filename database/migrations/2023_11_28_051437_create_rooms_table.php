@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name_room');
             $table->string('slug_room')->nullable();
             $table->string('location_room');
-            $table->longText('photo_room');
+            $table->longText('photo_room')->nullable();
             $table->string('description_room');
             $table->enum('level_room', ['Class 1', 'Class 2', 'Class 3']);
             $table->timestamps();

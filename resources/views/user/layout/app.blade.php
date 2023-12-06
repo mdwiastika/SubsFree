@@ -86,9 +86,11 @@
    <div class="bg-white/100 absolute left-0 right-0 z-50 h-full flex justify-center items-center" id="loader">
       <div class="loader"></div>
    </div>
-   @include('user.layout.header')
-   @yield('content')
-   @include('user.layout.footer')
+   <div class="flex flex-col justify-between min-h-screen">
+      @include('user.layout.header')
+      @yield('content')
+      @include('user.layout.footer')
+   </div>
    <script src="{{ asset('template-admin/plugins/jquery/jquery.min.js') }}"></script>
    <script src="{{ asset('vendors/sweetalert/sweetalert2.js') }}"></script>
    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

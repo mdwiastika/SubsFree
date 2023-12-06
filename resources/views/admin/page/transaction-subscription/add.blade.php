@@ -24,15 +24,11 @@
                         </tr>
                         <tr>
                            <td>Order ID</td>
-                           <td>{{ $data->order_id }}</td>
+                           <td>{{ $data->external_id }}</td>
                         </tr>
                         <tr>
                            <td>Gross Amount</td>
-                           <td>Rp. {{ number_format($data->gross_amount, 0, ',', '.') }}</td>
-                        </tr>
-                        <tr>
-                           <td>Payment Code</td>
-                           <td>{{ $data->payment_code }}</td>
+                           <td>Rp. {{ number_format($data->amount, 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                            <td>Payment Type</td>
@@ -40,7 +36,7 @@
                         </tr>
                         <tr>
                            <td>Transaction Status</td>
-                           <td>{{ $data->transaction_status }}</td>
+                           <td>{{ $data->status }}</td>
                         </tr>
                      </table>
                   </div>

@@ -10,6 +10,7 @@ class TransactionSubscription extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_transaction_subscription';
+    protected $guarded = ['id_transaction_subscription'];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

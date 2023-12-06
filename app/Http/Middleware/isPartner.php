@@ -20,7 +20,7 @@ class isPartner
         if (in_array(Auth::user()->level_user, ['Super Admin', 'Admin', 'Partner'])) {
             return $next($request);
         } else {
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
     }
 }

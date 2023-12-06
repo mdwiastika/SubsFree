@@ -88,7 +88,7 @@
                search: false
             },
             {
-               field: 'order_id',
+               field: 'external_id',
                title: 'Order ID',
                editable: false,
                sortable: true,
@@ -97,8 +97,8 @@
                search: true
             },
             {
-               field: 'gross_amount',
-               title: 'Gross Amount',
+               field: 'amount',
+               title: 'Amount',
                editable: false,
                sortable: true,
                width: 200,
@@ -106,7 +106,7 @@
                search: true
             },
             {
-               field: 'transaction_status',
+               field: 'status',
                title: 'Status',
                editable: false,
                sortable: true,

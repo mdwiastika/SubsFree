@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\Admin\TransactionRoomController;
 use App\Http\Controllers\Web\Admin\TransactionSubscriptionController;
 use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\User\AboutController;
+use App\Http\Controllers\Web\User\HistoryTransactionController;
 use App\Http\Controllers\Web\User\HomeController;
 use App\Http\Controllers\Web\User\RoomController as UserRoomController;
 use App\Http\Controllers\Web\User\SubscriptionUserController;
@@ -30,12 +31,15 @@ Route::get('/', [HomeController::class, 'main'])->name('home');
 Route::get('/about', [AboutController::class, 'main'])->name('userAbout');
 Route::get('/rooms', [UserRoomController::class, 'main'])->name('userRooms');
 Route::get('/rooms/{slug_room}', [UserRoomController::class, 'detail'])->name('userRoomDetail');
-Route::get('/subscription', [SubscriptionUserController::class, 'main'])->name('userSubscriptionUser');
 Route::get('/admin', function () {
     // Wait user template
     return redirect()->route('dashboard');
 });
 Route::middleware('auth')->group(function () {
+    Route::get('/subscription', [SubscriptionUserController::class, 'main'])->name('userSubscriptionUser');
+    Route::get('/subscription/payment', [SubscriptionUserController::class, 'createPayment'])->name('createPaymentSubscription');
+    Route::post('/subscription/callback', [SubscriptionUserController::class, 'callbackPayment']);
+    Route::get('/history-transactions', [HistoryTransactionController::class, 'main'])->name('historyTransaction');
     Route::prefix('admin')->group(function () {
         Route::get('/my-profile', [UserController::class, 'myProfile'])->name('myProfile');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

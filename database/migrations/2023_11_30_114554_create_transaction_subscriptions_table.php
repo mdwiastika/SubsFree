@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('transaction_subscriptions', function (Blueprint $table) {
             $table->id('id_transaction_subscription');
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete();
-            $table->string('transaction_id')->nullable();
-            $table->string('order_id')->nullable();
-            $table->string('gross_amount');
-            $table->string('pdf_url')->nullable();
-            $table->string('payment_code')->nullable();
-            $table->string('payment_type');
-            $table->string('transaction_status');
+            $table->string('checkout_link')->nullable();
+            $table->string('external_id');
+            $table->string('payment_type')->nullable();
+            $table->string('status');
+            $table->string('amount');
             $table->timestamps();
         });
     }

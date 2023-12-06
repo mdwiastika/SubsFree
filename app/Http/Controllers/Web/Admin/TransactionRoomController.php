@@ -78,6 +78,9 @@ class TransactionRoomController extends Controller
         $transaction_room->save();
 
         if ($transaction_room) {
+            $no_receipt = 'SA-' . str_pad($transaction_room->id_transaction_room, 6, '0', STR_PAD_LEFT);
+            $transaction_room->no_receipt = $no_receipt;
+            $transaction_room->save();
             if (empty($id)) {
                 return ResponseJsonTrait::responseJson(200, 'success', 'Successfully Save Data', null);
             } else {
