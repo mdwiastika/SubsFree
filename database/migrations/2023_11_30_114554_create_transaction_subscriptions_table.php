@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id('id_transaction_subscription');
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete();
             $table->string('checkout_link')->nullable();
-            $table->string('external_id');
+            $table->string('external_id')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('status');
             $table->string('amount');
+            $table->date('date_subscription');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Models\IdentitasWeb;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TransactionSubscription;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -27,6 +28,7 @@ class SubscriptionUserController extends Controller
     }
     public function createPayment(Request $request)
     {
+
         $identitas_web = IdentitasWeb::query()->first();
         $external_id = Str::uuid();
         $amount = 0;
@@ -37,55 +39,70 @@ class SubscriptionUserController extends Controller
         } else {
             $amount = $identitas_web->payment_class_3;
         }
-        $transaction_subscription = TransactionSubscription::create([
-            'user_id' => Auth::id(),
-            'checkout_link' => '-',
-            'external_id' => $external_id,
-            'payment_type' => '-',
-            'status' => 'pending',
-            'amount' => $amount,
-        ]);
-        $params = [
-            'external_id' => $external_id,
-            'payer_email' => Auth::user()->email,
-            'description' => "User Subscription Rp. $amount",
-            'amount' => $amount,
-            'redirect_url' => '127.0.0.1:8000/subscription'
-        ];
-        $invoice = $this->createInvoice($params);
-        $transaction_subscription->update([
-            'checkout_link' => $invoice['invoice_url'],
-        ]);
-        return redirect()->away($transaction_subscription->checkout_link);
-    }
-    public function createInvoice($request)
-    {
-        $xendit_key = base64_encode(env('XENDIT_SECRET_KEY'));
-        $authorization = "Basic $xendit_key";
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => $authorization,
-        ];
-        $res = Http::withHeaders($headers)->post('https://api.xendit.co/v2/invoices', $request);
-        return json_decode($res->body(), true);
-    }
-    public function callbackInvoice(Request $request)
-    {
-        try {
-            $transaction_subscription = TransactionSubscription::query()->where('external_id', $request->external_id)->first();
-            if ($request->header('x-callback-token') != env('XENDIT_CALLBACK_TOKEN')) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Invalid callback token',
-                ], 400);
+        $data['subscription_valid'] = false;
+        $date_subscription = '';
+        $transaction_subscription_latest = TransactionSubscription::query()->where('user_id', Auth::id())->where('status', 'Paid')->latest()->first();
+        if ($transaction_subscription_latest) {
+            $date_subscription_latest = Carbon::now($transaction_subscription_latest->date_subscription);
+            if (Carbon::now()->diffInMonths($date_subscription_latest)) {
+                $date_subscription = $date_subscription_latest->addMonth();
+            } else {
+                $data['subscription_valid'] = true;
             }
-            if ($transaction_subscription) {
+        } else {
+            $date_subscription_latest = Carbon::parse(Auth::user()->created_at)->subMonth();
+            $date_subscription = Carbon::parse(Auth::user()->created_at);
+        }
+        if ($data['subscription_valid']) {
+            $data['message'] = 'You have already paid for your subscription for this month';
+        } else {
+            $transaction_subscription = TransactionSubscription::create([
+                'user_id' => Auth::id(),
+                'checkout_link' => '-',
+                'external_id' => $external_id,
+                'payment_type' => '-',
+                'status' => 'Unpaid',
+                'amount' => $amount,
+                'date_subscription' => $date_subscription,
+            ]);
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            \Midtrans\Config::$isProduction = false;
+            \Midtrans\Config::$isSanitized = true;
+            \Midtrans\Config::$is3ds = true;
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $external_id,
+                    'gross_amount' => $amount,
+                ),
+                'customer_details' => array(
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                    'phone' => Auth::user()->no_wa,
+                ),
+            );
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $interval_unpayment = Carbon::now()->diffInMonths($date_subscription_latest);
+            $data['message'] = "You haven't paid for $interval_unpayment months, please pay now";
+        }
+        $data['title'] = $this->title;
+        $data['menu'] = $this->menu;
+        $data['sub_menu'] = $this->sub_menu;
+        $data['snap_token'] = $snapToken;
+        $data['identitas_web'] = $identitas_web;
+        return view($this->direktori . '.subscription', $data);
+    }
+    public function callbackPayment(Request $request)
+    {
+        $server_key = config('midtrans.server_key');
+        $hashed = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $server_key);
+        if ($hashed == $request->signature_key) {
+            if ($request->transaction_status == 'capture') {
+                $transaction_subscription = TransactionSubscription::query()->where('external_id', $request->order_id)->first();
                 $transaction_subscription->update([
-                    'status' => $request->status,
+                    'status' => 'Paid',
                 ]);
             }
-        } catch (\Throwable $th) {
-            //throw $th;
         }
     }
 }
