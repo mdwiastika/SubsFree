@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Libraries\Datagrid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionRoom extends Model
 {
@@ -22,7 +23,7 @@ class TransactionRoom extends Model
     public static function getData($input)
     {
         $table = 'transaction_rooms as tr';
-        $select = '*';
+        $select = 'tr.*';
 
         $replace_field  = [
             // ['old_name' => 'subLevel', 'new_name' => 'sub_level'],
@@ -37,7 +38,11 @@ class TransactionRoom extends Model
 
         $datagrid = new Datagrid;
         $data = $datagrid->datagrid_query($param, function ($data) {
-            return $data;
+            if (Auth::user()->level_user == 'Partner') {
+                return $data->join('rooms', 'rooms.id_room', '=', 'tr.room_id')->where('rooms.user_id', Auth::id());
+            } else {
+                return $data;
+            }
         });
 
         return $data;

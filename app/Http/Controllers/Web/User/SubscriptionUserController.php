@@ -79,7 +79,8 @@ class SubscriptionUserController extends Controller
                     'gross_amount' => $amount,
                 ),
                 'customer_details' => array(
-                    'name' => Auth::user()->name,
+                    'first_name' => Auth::user()->name,
+                    'last_name' => '',
                     'email' => Auth::user()->email,
                     'phone' => Auth::user()->no_wa,
                 ),

@@ -6,7 +6,7 @@
       </a>
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
          <button id="dropdownSmallButton" data-dropdown-toggle="dropdownSmall" class="hidden md:inline-flex items-center px-3 py-2 mb-3 me-3 text-sm font-medium text-center text-black rounded-lg md:mb-0 focus:outline-none" type="button">
-            <img src="{{ asset('/template-user/dist/image/user-profile.png') }}" class="w-10 h-10" alt="">
+            <img src="{{ asset('/template-user/dist/image/user.png') }}" class="w-10 h-10" alt="">
             <svg class="w-2 h-2 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 10 6">
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
             </svg>

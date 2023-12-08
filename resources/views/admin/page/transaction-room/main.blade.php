@@ -199,10 +199,12 @@
          var tag = '';
          tag += '<a href="javascript:void(0);" onclick="detail(' + rowIndex +
             ')" class="btn btn-warning btn-sm mr-1 mb-1" id="btn-detail"><i class="fa fa-eye"></i></a>';
-         tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_transaction_room +
-            '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
-         tag += '<a href="javascript:void(0);" onclick="deleted(' + rowIndex +
-            ')" class="btn btn-danger btn-sm mb-1" id="btn-delete"><i class="fa fa-trash"></i></a>';
+         if ("{{ auth()->user()->level_user != 'Partner' }}") {
+            tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_transaction_room +
+               '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
+            tag += '<a href="javascript:void(0);" onclick="deleted(' + rowIndex +
+               ')" class="btn btn-danger btn-sm mb-1" id="btn-delete"><i class="fa fa-trash"></i></a>';
+         }
          return tag;
       }
    </script>

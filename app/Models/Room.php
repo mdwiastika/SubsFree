@@ -6,6 +6,7 @@ use App\Http\Libraries\Datagrid;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Room extends Model
 {
@@ -46,7 +47,11 @@ class Room extends Model
 
         $datagrid = new Datagrid;
         $data = $datagrid->datagrid_query($param, function ($data) {
-            return $data;
+            if (Auth::user()->level_user == 'Partner') {
+                return $data->where('user_id', Auth::id());
+            } else {
+                return $data;
+            }
         });
 
         return $data;

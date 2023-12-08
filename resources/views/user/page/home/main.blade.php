@@ -18,32 +18,16 @@
       }
    </style>
    <section id="hero" class="hero w-full h-screen max-h-screen bg-cover lg:aspect-video bg-no-repeat flex justify-center items-center flex-col p-2 hover:bg-blend-darken" style="background-image: url({{ $identitas_web->banner_company ? asset($identitas_web->banner_company) : asset('/template-user/dist/image/banner.png') }})">
-      <h1 class="text-white text-4xl leading-normal text-center font-semibold font-inter tracking-wide md:text-6xl md:font-bold mb-4 lg:text-7xl lg:font-bold xl:text-9xl xl:font-bold xl:p-10">{{ $identitas_web->title_banner_company }}</h1>
-      <form class="block lg:flex justify-center items-center gap-3">
-         <div class="mt-2">
-            <div class="relative bg-white/60 backdrop-blur-sm flex justify-center items-center p-0 px-4 rounded-full w-full">
-               <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                  <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
-               </svg>
-               <input type="text" class="bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white md:py-3" name="location" id="location" placeholder="Location">
-            </div>
-         </div>
-         <div class="block md:flex md:gap-2">
-            <div class="mt-2 relative bg-white/60 backdrop-blur-sm flex justify-center items-center p-0 px-4 rounded-full w-full">
-               <input type="date" onfocus="this.blur()" onclick="this.blur()" class="relative -left-6 md:-left-4 px-10 md:py-3 before:content-['Start Date'] bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white" name="start_date" id="start_date">
-            </div>
-            <div class=" mt-2 relative bg-white/60 backdrop-blur-sm flex justify-center items-center p-0 px-4 rounded-full w-full">
-               <input type="date" onfocus="this.blur()" onclick="this.blur()" disabled class="relative -left-6 md:-left-4 px-10 md:py-3 before:content-['Start Date'] bg-transparent border-0 placeholder-white focus:border-0 focus:ring-0 text-white" name="end_date" id="end_date">
-            </div>
-         </div>
-         <div class="mt-2 flex justify-center">
-            <button type="submit" class="bg-[#FA8B02] text-white py-1 px-3 md:py-3 text-lg font-medium md:text-xl md:font-semibold rounded-full">Search <svg class="inline-block" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                  <path
-                     d="M17.5017 17.5007L13.7632 13.7555L17.5017 17.5007ZM15.835 8.75032C15.835 10.629 15.0887 12.4308 13.7602 13.7592C12.4318 15.0876 10.6301 15.834 8.75136 15.834C6.87266 15.834 5.07091 15.0876 3.74247 13.7592C2.41403 12.4308 1.66772 10.629 1.66772 8.75032C1.66772 6.87162 2.41403 5.06987 3.74247 3.74144C5.07091 2.413 6.87266 1.66669 8.75136 1.66669C10.6301 1.66669 12.4318 2.413 13.7602 3.74144C15.0887 5.06987 15.835 6.87162 15.835 8.75032V8.75032Z"
-                     stroke="white" stroke-width="2.00002" stroke-linecap="round" />
-               </svg></button>
-         </div>
-      </form>
+      <h1 class="text-white text-4xl leading-normal text-center font-semibold font-inter tracking-wide md:text-5xl md:font-bold mb-4 lg:text-7xl xl:text-8xl lg:font-bold xl:font-bold xl:p-10" id="title-banner"></h1>
+      <div>
+         <a href="{{ route('userRooms') }}" class="py-2 px-5 bg-[#FA8B02] rounded-full text-white flex justify-center items-center">
+            <span class="text-base md:text-lg uppercase font-bold">Booking Now&nbsp;</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-auto fill-white inline-block" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+               <path
+                  d="M288 48c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48V192h40V120c0-13.3 10.7-24 24-24s24 10.7 24 24v72h24c26.5 0 48 21.5 48 48V464c0 26.5-21.5 48-48 48H432 336c-26.5 0-48-21.5-48-48V48zm64 32v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16H368c-8.8 0-16 7.2-16 16zm16 80c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H368zM352 272v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H368c-8.8 0-16 7.2-16 16zm176-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H528zM512 368v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H528c-8.8 0-16 7.2-16 16zM224 160c0 6-1 11-2 16c20 14 34 38 34 64c0 45-36 80-80 80H160V480c0 18-15 32-32 32c-18 0-32-14-32-32V320H80c-45 0-80-35-80-80c0-26 13-50 33-64c-1-5-1-10-1-16c0-53 42-96 96-96c53 0 96 43 96 96z" />
+            </svg>
+         </a>
+      </div>
    </section>
    <section id="different-us" class="flex flex-col justify-center items-center px-4 py-6 md:py-10 lg:py-14 container mx-auto lg:flex-row lg:justify-evenly">
       <h2 class="text-3xl md:text-5xl font-bold flex-1 mb-4 lg:mb-0 max-w-[390px] text-left md:text-center">What Make <span class="text-[#FA8B02]">Us Different?</span></h2>
@@ -200,31 +184,13 @@
    </section>
 @endsection
 @section('js')
+   <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
    <script>
-      let today = new Date();
-      let minDate = new Date(today);
-      minDate.setDate(today.getDate() + 1);
-
-      let format_min_date = formatDate(minDate);
-      $('#start_date').attr('min', format_min_date);
-
-      function formatDate(date) {
-         var day = ("0" + date.getDate()).slice(-2);
-         var month = ("0" + (date.getMonth() + 1)).slice(-2);
-         var year = date.getFullYear();
-         return year + "-" + month + "-" + day;
-      }
-      $('#start_date').on('change', function() {
-         if ($(this).val()) {
-            $('#end_date').attr('disabled', false);
-            let min_date = new Date($(this).val());
-            let max_date = new Date($(this).val());
-            min_date.setDate(min_date.getDate() + 1);
-            max_date.setDate(max_date.getDate() + 10);
-            $('#end_date').attr('min', formatDate(min_date));
-            $('#end_date').attr('max', formatDate(max_date));
-         }
-      });
+      new TypeIt("#title-banner", {
+         strings: "{{ $identitas_web->title_banner_company }}",
+         speed: 75,
+         waitUntilVisible: true,
+      }).go();
    </script>
    <script>
       const swiper = new Swiper('.swiper', {

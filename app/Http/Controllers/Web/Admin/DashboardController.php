@@ -7,6 +7,7 @@ use App\Models\IdentitasWeb;
 use App\Models\TransactionRoom;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -20,9 +21,13 @@ class DashboardController extends Controller
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $data['identitas_web'] = IdentitasWeb::query()->first();
-        $data['pengguna_count'] = User::query()->where('level_user', 'Pengguna')->count();
-        $data['mitra_count'] = User::query()->where('level_user', 'Mitra')->count();
-        $data['transaksi_count'] = TransactionRoom::query()->count();
+        $data['pengguna_count'] = User::query()->where('level_user', 'Regular')->count();
+        $data['mitra_count'] = User::query()->where('level_user', 'Partner')->count();
+        if (Auth::user()->level_user == 'Partner') {
+            $data['transaksi_count'] = TransactionRoom::query()->join('rooms', 'rooms.id_room', '=', 'transaction_rooms.room_id')->where('rooms.user_id', Auth::id())->count();
+        } else {
+            $data['transaksi_count'] = TransactionRoom::query()->count();
+        }
         $data['cover_path'] = null;
         return view($this->direktori . '.main', $data);
     }

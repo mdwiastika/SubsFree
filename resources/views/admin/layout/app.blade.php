@@ -7,7 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
    <!-- Favicon icon -->
-   <link rel="icon" type="image/x-icon" sizes="16x16" href="{{ $identitas_web->logo_situs ? asset('/' . $identitas_web->logo_situs) : asset('/template-admin/dist/img/favicon.png') }}">
+   <link rel="shortcut icon" href="{{ $identitas_web->logo_company ? asset($identitas_web->logo_company) : asset('/template-user/dist/image/logo.png') }}" type="image/x-icon">
 
    <title>{{ $identitas_web->name_company }} | {{ $title }}</title>
 

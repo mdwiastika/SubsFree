@@ -20,14 +20,18 @@
                         @endif
                      </select>
                   </div>
-                  <div class="form-group col-12 col-lg-6">
-                     <label for="user_id">User</label>
-                     <select name="user_id" class="form-control d-block" id="user_id">
-                        @if ($edit)
-                           <option value="{{ $data->user_id }}">{{ $data->user->name }}</option>
-                        @endif
-                     </select>
-                  </div>
+                  @if (Auth::user()->level_user == 'Partner')
+                     <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                  @else
+                     <div class="form-group col-12 col-lg-6">
+                        <label for="user_id">User</label>
+                        <select name="user_id" class="form-control d-block" id="user_id">
+                           @if ($edit)
+                              <option value="{{ $data->user_id }}">{{ $data->user->name }}</option>
+                           @endif
+                        </select>
+                     </div>
+                  @endif
                   <div class="form-group col-12 col-md-6">
                      <label for="name_room">Name</label>
                      <input type="text" name="name_room" class="form-control" id="name_room" value="{{ $edit ? $data->name_room : '' }}" placeholder="Name Room">
@@ -41,10 +45,10 @@
                         <option value="Class 3" {{ $edit ? ($data->level_room == 'Class 3' ? 'selected' : '') : '' }}>Class 3</option>
                      </select>
                   </div>
-                  <div class="form-group col-12">
+                  <div class="form-group {{ Auth::user()->level_user == 'Partner' ? 'col-12 col-lg-6' : 'col-12' }}">
                      <label for="photo_room">Photo Room</label>
                      <input type="file" class="form-control" multiple name="photo_room[]" onchange="readURL(this)" accept=".png,.jpg,.jpeg">
-                     @if ($edit)
+                     @if ($edit && $data->photo_room)
                         @foreach (unserialize(base64_decode($data->photo_room)) as $single_photo_room)
                            <input type="hidden" name="old_photo_room" value="{{ $data->photo_room }}">
                            <img id="gambar_photo_room" src="{{ $edit ? ($data->photo_room ? asset('/' . $single_photo_room) : 'http://placehold.it/180') : 'http://placehold.it/180' }}" class="mt-4 rounded-lg block" style="width: 200px; height: 150px; object-fit: cover;" alt="your image" />

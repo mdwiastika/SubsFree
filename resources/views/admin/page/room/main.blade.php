@@ -6,11 +6,9 @@
             <div class="col-12">
                <div class="judul">Data {{ $title }}</div>
                <div class="anak-judul">Manajemen Data {{ $title }}</div>
-               @if (Auth::user()->level_user == 'Super Admin' || Auth::user()->level_user == 'Admin')
-                  <button type="button" class="btn btn-sm btn-info" onclick="add('0')" id="btn-add">
-                     <span class="fas fa-plus"></span>&nbsp Data {{ $title }}
-                  </button>
-               @endif
+               <button type="button" class="btn btn-sm btn-info" onclick="add('0')" id="btn-add">
+                  <span class="fas fa-plus"></span>&nbsp Data {{ $title }}
+               </button>
             </div>
          </div>
       </div>
@@ -182,21 +180,10 @@
          var tag = '';
          tag += '<a href="javascript:void(0);" onclick="detail(' + rowIndex +
             ')" class="btn btn-warning btn-sm mr-1 mb-1" id="btn-detail"><i class="fa fa-eye"></i></a>';
-         if (rowData.level_user_check != 'Super Admin') {
-            @if (Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Super Admin')
-               if ("{{ Auth::user()->level_user }}" == 'Admin') {
-                  if (rowData.level_user_check != 'Admin') {
-                     tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_room +
-                        '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
-                  }
-               } else {
-                  tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_room +
-                     '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
-               }
-               tag += '<a href="javascript:void(0);" onclick="deleted(' + rowIndex +
-                  ')" class="btn btn-danger btn-sm mb-1" id="btn-delete"><i class="fa fa-trash"></i></a>';
-            }
-         @endif
+         tag += '<a href="javascript:void(0)" onclick="add(\'' + rowData.id_room +
+            '\')" class="btn btn-primary btn-sm mr-1 mb-1" id="btn-edit"> <i class="fa fa-edit"></i></a>';
+         tag += '<a href="javascript:void(0);" onclick="deleted(' + rowIndex +
+            ')" class="btn btn-danger btn-sm mb-1" id="btn-delete"><i class="fa fa-trash"></i></a>';
          return tag;
       }
    </script>

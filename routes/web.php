@@ -71,11 +71,6 @@ Route::middleware('auth')->group(function () {
                 Route::post('/store', [TransactionSubscriptionController::class, 'store'])->name('transactionSubscriptionStore');
                 Route::post('/destroy', [TransactionSubscriptionController::class, 'destroy'])->name('transactionSubscriptionDestroy');
             });
-            Route::prefix('other')->group(function () {
-                Route::get('/cariUser', [OtherController::class, 'cariUser'])->name('otherCariUser');
-                Route::get('/cariCategoryRoom', [OtherController::class, 'cariCategoryRoom'])->name('otherCariCategoryRoom');
-                Route::get('/cariRoom', [OtherController::class, 'cariRoom'])->name('otherCariRoom');
-            });
         });
         Route::middleware('is_partner')->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -92,6 +87,11 @@ Route::middleware('auth')->group(function () {
                 Route::post('/create', [RoomController::class, 'create'])->name('roomCreate');
                 Route::post('/store', [RoomController::class, 'store'])->name('roomStore');
                 Route::post('/destroy', [RoomController::class, 'destroy'])->name('roomDestroy');
+            });
+            Route::prefix('other')->group(function () {
+                Route::get('/cariUser', [OtherController::class, 'cariUser'])->name('otherCariUser');
+                Route::get('/cariCategoryRoom', [OtherController::class, 'cariCategoryRoom'])->name('otherCariCategoryRoom');
+                Route::get('/cariRoom', [OtherController::class, 'cariRoom'])->name('otherCariRoom');
             });
         });
     });
