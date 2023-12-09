@@ -1,4 +1,4 @@
-<nav class="backdrop-blur-lg bg-white/60 fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+<nav class="backdrop-blur-lg bg-white/50 fixed w-full z-20 top-0 start-0 border-b border-gray-200" id="navbar">
    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
          <img src="{{ $identitas_web->logo_company ? asset($identitas_web->logo_company) : asset('/template-user/dist/image/logo.png') }}" class="h-8" alt="{{ $identitas_web->name_company }} Logo">

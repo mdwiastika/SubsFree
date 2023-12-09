@@ -1,7 +1,9 @@
 @foreach ($rooms as $room)
-   <div class="max-w-sm bg-white border border-gray-200 rounded-xl shadow p-3 mx-auto">
+   <div class="max-w-sm bg-white border hover:bg-gray-100 border-gray-200 group rounded-xl shadow p-3 mx-auto overflow-hidden">
       <a href="{{ route('userRoomDetail', ['slug_room' => $room->slug_room, 'location' => request('location'), 'start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="">
-         <img class="rounded-xl aspect-video object-cover" src="{{ asset(unserialize(base64_decode($room->photo_room))[0]) }}" alt="" />
+         <div class="overflow-hidden rounded-xl">
+            <img class="rounded-xl aspect-video object-cover transition-transform duration-300 transform group-hover:scale-125" src="{{ asset(unserialize(base64_decode($room->photo_room))[0]) }}" alt="{{ $room->name_room }}" />
+         </div>
       </a>
       <a href="{{ route('userRoomDetail', ['slug_room' => $room->slug_room, 'location' => request('location'), 'start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="py-5 px-2">
          <div class="flex justify-between items-center">

@@ -25,7 +25,7 @@
                                  </div>
                                  <div class="form-group col-12 col-md-6">
                                     <label for="no_wa">NO. WA</label>
-                                    <input type="text" name="no_wa" class="form-control" id="no_wa" value="{{ $edit ? $data->no_wa : '' }}" placeholder="NO. WA">
+                                    <input type="number" name="no_wa" class="form-control" id="no_wa" value="{{ $edit ? $data->no_wa : '' }}" placeholder="NO. WA">
                                  </div>
                                  <div class="form-group col-12 col-md-6">
                                     <label for="proof_authenticity">Proof Authenticity (Optional)</label>

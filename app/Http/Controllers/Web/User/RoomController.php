@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Web\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\IdentitasWeb;
-use App\Models\Room;
-use App\Models\TransactionRoom;
 use Carbon\Carbon;
+use App\Models\Room;
+use App\Models\IdentitasWeb;
 use Illuminate\Http\Request;
+use App\Models\TransactionRoom;
+use App\Traits\ResponseJsonTrait;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class RoomController extends Controller
 {
@@ -37,13 +39,34 @@ class RoomController extends Controller
         }
         return view($this->direktori . '.main', $data);
     }
-    public function detail($slug_room)
+    public function detail(Request $request, $slug_room)
     {
-        $data['title'] = $this->title;
-        $data['menu'] = $this->menu;
-        $data['sub_menu'] = $this->sub_menu;
-        $data['identitas_web'] = IdentitasWeb::query()->first();
-        $data['cover_path'] = null;
+        try {
+            $request->validate([
+                'start_date' => 'date_format:d/m/Y',
+                'end_date' => 'date_format:d/m/Y'
+            ]);
+            $data['title'] = $this->title;
+            $data['menu'] = $this->menu;
+            $data['sub_menu'] = $this->sub_menu;
+            $data['identitas_web'] = IdentitasWeb::query()->first();
+            $data['cover_path'] = null;
+            $data['location'] = $request->location;
+            $data['start_date'] = $request->start_date;
+            $data['end_date'] = $request->end_date;
+            $data['room'] = Room::query()->where('slug_room', $slug_room)->with(['user'])->first();
+            if (empty($data['location']) || empty($data['start_date']) || empty($data['end_date']) || empty($data['room'])) {
+                return abort(404, 'Not Found');
+            }
+            $start_date = Carbon::createFromFormat('d/m/Y', $request->start_date);
+            $end_date = Carbon::createFromFormat('d/m/Y', $request->end_date);
+            if ($start_date >= $end_date || empty($start_date->greaterThan(Carbon::now()))) {
+                return abort(503, 'Invalid Information');
+            }
+            return view($this->direktori . '.detail', $data);
+        } catch (\Throwable $th) {
+            return abort(503, 'Invalid Information');
+        }
     }
     public function getRooms(Request $request)
     {
@@ -76,5 +99,60 @@ class RoomController extends Controller
         $data['rooms'] = Room::query()->whereIn('level_room', $level_rooms)->whereNotIn('id_room', $room_id_exceptions)->where('location_room', 'LIKE', "%$request->location%")->with(['category_room'])->latest()->paginate(6);
         $content = view('user.page.room.get-main', $data)->render();
         return ['status' => 'success', 'content' => $content];
+    }
+    public function bookingRoom(Request $request, $slug_room)
+    {
+        if (empty($slug_room)) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Invalid Room', null);
+        }
+        if (empty($request->location)) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Invalid Location', null);
+        }
+        if (empty($request->start_date)) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Invalid Start Date', null);
+        }
+        if (empty($request->end_date)) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Invalid End Date', null);
+        }
+        $start_date = Carbon::createFromFormat('d/m/Y', $request->start_date, 'Asia/Jakarta');
+        $end_date = Carbon::createFromFormat('d/m/Y', $request->end_date, 'Asia/Jakarta');
+        $start_date_format = $start_date->format('Y/m/d');
+        $end_date_format = $end_date->format('Y/m/d');
+        if ($start_date >= $end_date || empty($start_date->greaterThan(Carbon::now()))) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Please Enter Valid Start & End Date', null);
+        }
+        $room_id_exceptions = TransactionRoom::where(function ($query) use ($start_date_format, $end_date_format) {
+            $query->whereBetween('start_date', [$start_date_format, $end_date_format])
+                ->orWhereBetween('end_date', [$start_date_format, $end_date_format])
+                ->orWhere(function ($query) use ($start_date_format, $end_date_format) {
+                    $query->where('start_date', '<=', $start_date_format)
+                        ->where('end_date', '>=', $end_date_format);
+                });
+        })->pluck('room_id');
+        $room = Room::query()->whereNotIn('id_room', $room_id_exceptions)->where('slug_room', $slug_room)->first();
+        if (empty($room)) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Room Full, Please Select Other Room', null);
+        }
+        $transaction_interval = TransactionRoom::query()
+            ->selectRaw('SUM(DATEDIFF(end_date, start_date)) as total_interval_harian')
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->where('user_id', Auth::id())
+            ->value('total_interval_harian');
+        $remaining_interval = 10 - $transaction_interval;
+        if ($start_date->diffInDays($end_date) > $remaining_interval) {
+            return ResponseJsonTrait::responseJson(500, 'error', 'The maximum monthly booking is 10 times. You exceed the monthly booking amount', null);
+        }
+        $transaction_room = new TransactionRoom();
+        $transaction_room->user_id = Auth::id();
+        $transaction_room->room_id = $room->id_room;
+        $transaction_room->start_date = $start_date;
+        $transaction_room->end_date = $end_date;
+        $transaction_room->save();
+        if ($transaction_room) {
+            return ResponseJsonTrait::responseJson(200, 'success', 'Booking Success, Have a Great Time!', null);
+        } else {
+            return ResponseJsonTrait::responseJson(500, 'error', 'Failed Booking, Please Try Again!', null);
+        }
     }
 }

@@ -31,12 +31,13 @@ Route::get('/', [HomeController::class, 'main'])->name('home');
 Route::get('/about', [AboutController::class, 'main'])->name('userAbout');
 Route::get('/rooms', [UserRoomController::class, 'main'])->name('userRooms');
 Route::post('/get-rooms', [UserRoomController::class, 'getRooms'])->name('userGetRooms');
-Route::get('/rooms/{slug_room}', [UserRoomController::class, 'detail'])->name('userRoomDetail');
 Route::get('/admin', function () {
     // Wait user template
     return redirect()->route('dashboard');
 });
 Route::middleware('auth')->group(function () {
+    Route::get('/rooms/{slug_room}', [UserRoomController::class, 'detail'])->name('userRoomDetail');
+    Route::post('/rooms/{slug_room}', [UserRoomController::class, 'bookingRoom'])->name('userBookingRoomDetail');
     Route::get('/subscription', [SubscriptionUserController::class, 'main'])->name('userSubscriptionUser');
     Route::get('/subscription/payment', [SubscriptionUserController::class, 'createPayment'])->name('createPaymentSubscription');
     Route::get('/history-transactions', [HistoryTransactionController::class, 'main'])->name('historyTransaction');

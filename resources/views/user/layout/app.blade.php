@@ -84,12 +84,14 @@
    </style>
 </head>
 
-<body class="font-sans overflow-hidden">
+<body class="font-sans overflow-hidden bg-gray-50">
    <div class="bg-white/100 absolute left-0 right-0 z-50 h-full flex justify-center items-center" id="loader">
       <div class="loader"></div>
    </div>
    <div class="flex flex-col justify-between min-h-screen">
+      {{-- <header class="header"> --}}
       @include('user.layout.header')
+      {{-- </header> --}}
       @yield('content')
       @include('user.layout.footer')
    </div>

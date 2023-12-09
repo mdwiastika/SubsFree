@@ -2,7 +2,7 @@
 @section('content')
    <form action="{{ route('createPaymentSubscription') }}" class="h-screen w-full flex justify-center items-center flex-col">
       @csrf
-      <img src="{{ asset('/template-user/dist/image/payment.jpg') }}" class="w-[300px] h-auto md:w-[450px] lg:w-[550px] xl:w-[650px]" alt="">
+      <img src="{{ asset('/template-user/dist/image/payment.png') }}" class="w-[300px] h-auto md:w-[450px] lg:w-[550px] xl:w-[650px]" alt="">
       <div class="mt-3 mb-3">
          <span class="text-lg">{{ Auth::user()->name }}</span>
          <span class="text-lg text-[#FA8B02] font-semibold">({{ Auth::user()->level_subscription }})</span>

@@ -59,14 +59,16 @@
    @endif
    <section id="rooms" class="grid gap-x-4 gap-y-6 grid-cols-1 relative -top-10 container mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
    </section>
-   <div class="flex justify-center py-4">
-      <button type="button" id="load-more-content" class="py-1 px-4 rounded-full bg-[#FA8B02] text-white">Load More
-         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-auto fill-white inline-block" viewBox="0 0 24 24">
-            <path d="M12.0001 19.1643L18.2072 12.9572L16.793 11.543L12.0001 16.3359L7.20718 11.543L5.79297 12.9572L12.0001 19.1643ZM12.0001 13.5144L18.2072 7.30728L16.793 5.89307L12.0001 10.686L7.20718 5.89307L5.79297 7.30728L12.0001 13.5144Z"></path>
-         </svg>
-      </button>
-      <span class="text-lg hidden" id="end-room-content">Nantikan konten menarik berikutnya</span>
-   </div>
+   @if (!empty(request('location')) && !empty(request('start_date')) && !empty(request('end_date')))
+      <div class="flex justify-center py-4">
+         <button type="button" id="load-more-content" class="py-1 px-4 rounded-full bg-[#FA8B02] text-white">Load More
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-auto fill-white inline-block" viewBox="0 0 24 24">
+               <path d="M12.0001 19.1643L18.2072 12.9572L16.793 11.543L12.0001 16.3359L7.20718 11.543L5.79297 12.9572L12.0001 19.1643ZM12.0001 13.5144L18.2072 7.30728L16.793 5.89307L12.0001 10.686L7.20718 5.89307L5.79297 7.30728L12.0001 13.5144Z"></path>
+            </svg>
+         </button>
+         <span class="text-lg hidden" id="end-room-content">Nantikan konten menarik berikutnya</span>
+      </div>
+   @endif
 @endsection
 @section('js')
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -175,7 +177,6 @@
          $('#start_date').trigger('change');
       @endif
       function getRooms() {
-         console.log("test");
          page++;
          let data = new FormData();
          data.append('location', "{{ request('location') }}")

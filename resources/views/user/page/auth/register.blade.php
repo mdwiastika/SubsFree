@@ -31,7 +31,7 @@
             </div>
             <div class="p-4 text-[#9B9B9B]">
                <label for="no_wa">No WA</label>
-               <input type="text" name="no_wa" required id="no_wa" class="p-1 focus:outline-none border-b border-x-0 border-t-0 block border-[#9B9B9B] w-full" />
+               <input type="number" name="no_wa" required id="no_wa" class="p-1 focus:outline-none border-b border-x-0 border-t-0 block border-[#9B9B9B] w-full" />
             </div>
             <div class="p-4 text-[#9B9B9B]">
                <label for="password">Password</label>
@@ -183,8 +183,12 @@
                });
             } else if (data.status == 'error' || data.status == 'warning') {
                swal('Maaf', data.message, data.status);
+               form1.classList.remove("hidden");
+               form2.classList.add("hidden");
             } else {
                button.animateCss('shake');
+               form1.classList.remove("hidden");
+               form2.classList.add("hidden");
             }
          }).fail(function() {
             swal("Sorry !", "An Error Occurred, Please Try Again !!", "warning");
