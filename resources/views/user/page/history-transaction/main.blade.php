@@ -1,37 +1,37 @@
 @extends('user.layout.app')
 @section('content')
-   <section class="mt-28 mb-7" id="table-transaction">
+   <section class="mt-28 mb-7 container mx-auto" id="table-transaction">
       <div class="relative overflow-x-scroll shadow-md sm:rounded-lg">
-         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                <tr>
-                  <th scope="col" class="px-6 py-3 text-base text-[#FA8B02]">
+                  <th scope="col" class="px-6 py-3 text-sm text-[#FA8B02]">
                      No Receipt
                   </th>
-                  <th scope="col" class="px-6 py-3 text-base text-[#FA8B02]">
+                  <th scope="col" class="px-6 py-3 text-sm text-[#FA8B02] min-w-[200px]">
                      Room name
                   </th>
-                  <th scope="col" class="px-6 py-3 text-base text-[#FA8B02]">
+                  <th scope="col" class="px-6 py-3 text-sm text-[#FA8B02]">
                      Category
                   </th>
-                  <th scope="col" class="px-6 py-3 text-base text-[#FA8B02]">
+                  <th scope="col" class="px-6 py-3 text-sm text-[#FA8B02]">
                      Class
                   </th>
                </tr>
             </thead>
             <tbody>
                @foreach ($transaction_rooms as $transaction_room)
-                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <tr class="odd:bg-white even:bg-gray-50">
+                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ $transaction_room->no_receipt }}
                      </th>
                      <td class="px-6 py-4">
-                        <div class="flex justify-start gap-2">
+                        <div class="block lg:flex justify-start gap-4">
                            @php
                               $image = unserialize(base64_decode($transaction_room->room->photo_room));
                            @endphp
                            <img src="{{ asset($image[0]) }}" class="h-20 w-28 rounded-lg bg-cover" alt="">
-                           <div class="block">
+                           <div class="block mt-3 lg:mt-0">
                               <div class="text-gray-900">{{ $transaction_room->room->name_room }}</div>
                               <div class="flex gap-2">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 24 25" fill="none">

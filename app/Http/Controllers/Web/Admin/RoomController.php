@@ -81,6 +81,9 @@ class RoomController extends Controller
         }
         $destination_path = public_path('/image-upload/room');
         if ($request->hasFile('photo_room')) {
+            if (count($request->file('photo_room')) > 4) {
+                return ResponseJsonTrait::responseJson(500, 'error', 'The Number of Photo Rooms Can\'t Exceed 4 Pieces', null);
+            }
             if ($request->old_photo_room) {
                 foreach (unserialize(base64_decode($request->old_photo_room)) as $key => $single_image) {
                     $path = $single_image;

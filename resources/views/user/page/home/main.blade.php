@@ -1,3 +1,6 @@
+@php
+   use Carbon\Carbon;
+@endphp
 @extends('user.layout.app')
 @section('content')
    <style>
@@ -106,6 +109,17 @@
             <h3 class="text-3xl md:text-5xl font-bold mb-4 lg:mb-6 text-left">Ultimate Travel <span class="text-[#FA8B02]">Experience</span></h3>
             <p class="text-justify text-gray-600">Our user-friendly platform ensures a hassle-free booking experience. From browsing available rooms to making secure payments, we prioritize simplicity and efficiency in every step of the process.</p>
          </div>
+         @php
+            $date_now = Carbon::now();
+            $date_tommorow = $date_now
+                ->copy()
+                ->addDay()
+                ->format('d/m/Y');
+            $date_after_tommorow = $date_now
+                ->copy()
+                ->addDay(2)
+                ->format('d/m/Y');
+         @endphp
          <div class="swiper w-[300px] h-[450px] md:w-[600px] xl:w-[700px] mt-4 lg:mt-0 m-0">
             <div class="swiper-wrapper">
                <div class="swiper-slide rounded-lg border border-blue-500 flex justify-center items-center p-3 hover:p-0 transition-all duration-300">
@@ -116,7 +130,7 @@
                         </svg>
                         <span class="text-white">&nbsp;Jakarta</span>
                      </div>
-                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                     <a href="{{ route('userRooms', ['location' => 'Jakarta', 'start_date' => $date_tommorow, 'end_date' => $date_after_tommorow]) }}" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
                         <span class="text-white">Check-In Now</span>
                      </a>
                   </div>
@@ -129,7 +143,7 @@
                         </svg>
                         <span class="text-white">&nbsp;Surabaya</span>
                      </div>
-                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                     <a href="{{ route('userRooms', ['location' => 'Surabaya', 'start_date' => $date_tommorow, 'end_date' => $date_after_tommorow]) }}" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
                         <span class="text-white">Check-In Now</span>
                      </a>
                   </div>
@@ -142,7 +156,7 @@
                         </svg>
                         <span class="text-white">&nbsp;Jogjakarta</span>
                      </div>
-                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                     <a href="{{ route('userRooms', ['location' => 'Jogjakarta', 'start_date' => $date_tommorow, 'end_date' => $date_after_tommorow]) }}" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
                         <span class="text-white">Check-In Now</span>
                      </a>
                   </div>
@@ -155,7 +169,7 @@
                         </svg>
                         <span class="text-white">&nbsp;Bali</span>
                      </div>
-                     <a href="#" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
+                     <a href="{{ route('userRooms', ['location' => 'Bali', 'start_date' => $date_tommorow, 'end_date' => $date_after_tommorow]) }}" class="rounded-full py-1 px-3 flex items-center justify-start w-[150px] border border-white">
                         <span class="text-white">Check-In Now</span>
                      </a>
                   </div>
