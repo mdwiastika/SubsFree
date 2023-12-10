@@ -160,6 +160,9 @@ class RoomController extends Controller
         $transaction_room->end_date = $end_date;
         $transaction_room->save();
         if ($transaction_room) {
+            $no_receipt = 'SA-' . str_pad($transaction_room->id_transaction_room, 6, '0', STR_PAD_LEFT);
+            $transaction_room->no_receipt = $no_receipt;
+            $transaction_room->save();
             return ResponseJsonTrait::responseJson(200, 'success', 'Booking Success, Have a Great Time!', null);
         } else {
             return ResponseJsonTrait::responseJson(500, 'error', 'Failed Booking, Please Try Again!', null);
