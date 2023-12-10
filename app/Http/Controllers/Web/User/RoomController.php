@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\TransactionRoom;
 use App\Traits\ResponseJsonTrait;
 use App\Http\Controllers\Controller;
+use App\Models\TransactionSubscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
@@ -132,6 +133,15 @@ class RoomController extends Controller
         $room = Room::query()->whereNotIn('id_room', $room_id_exceptions)->where('slug_room', $slug_room)->first();
         if (empty($room)) {
             return ResponseJsonTrait::responseJson(500, 'error', 'Room Full, Please Select Other Room', null);
+        }
+        $transaction_subscription_latest = TransactionSubscription::query()->where('user_id', Auth::id())->where('status', 'Paid')->latest()->first();
+        if ($transaction_subscription_latest) {
+            $date_subscription_latest = Carbon::parse($transaction_subscription_latest->date_subscription, 'UTC');
+            if (Carbon::now()->diffInMonths($date_subscription_latest)) {
+                return ResponseJsonTrait::responseJson(500, 'error', 'You have to pay this month\'s subscription to book a place.', null);
+            }
+        } else {
+            return ResponseJsonTrait::responseJson(500, 'error', 'You have to pay this month\'s subscription to book a place.', null);
         }
         $transaction_interval = TransactionRoom::query()
             ->selectRaw('SUM(DATEDIFF(end_date, start_date)) as total_interval_harian')
