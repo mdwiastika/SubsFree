@@ -30,13 +30,12 @@ class RoomController extends Controller
         if (Auth::check()) {
             $transaction_interval = TransactionRoom::query()
                 ->selectRaw('SUM(DATEDIFF(end_date, start_date)) as total_interval_harian')
-                ->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
                 ->where('user_id', Auth::id())
                 ->value('total_interval_harian');
-            $data['remaining_interval'] = 10 - $transaction_interval;
+            $data['remaining_interval'] = 5 - $transaction_interval;
         } else {
-            $data['remaining_interval'] = 10;
+            $data['remaining_interval'] = 5;
         }
         return view($this->direktori . '.main', $data);
     }
@@ -145,13 +144,12 @@ class RoomController extends Controller
         }
         $transaction_interval = TransactionRoom::query()
             ->selectRaw('SUM(DATEDIFF(end_date, start_date)) as total_interval_harian')
-            ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->where('user_id', Auth::id())
             ->value('total_interval_harian');
-        $remaining_interval = 10 - $transaction_interval;
+        $remaining_interval = 5 - $transaction_interval;
         if ($start_date->diffInDays($end_date) > $remaining_interval) {
-            return ResponseJsonTrait::responseJson(500, 'error', 'The maximum monthly booking is 10 times. You exceed the monthly booking amount', null);
+            return ResponseJsonTrait::responseJson(500, 'error', 'Maximum annual order is 5 times. You exceeded your annual booking amount', null);
         }
         $transaction_room = new TransactionRoom();
         $transaction_room->user_id = Auth::id();
